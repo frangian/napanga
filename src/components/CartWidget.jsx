@@ -1,7 +1,7 @@
 
 const CartWidget = () => {
   return (
-    <div>CartWidget</div>
+    <div style={{ color: 'white' }}>0</div>
   )
 }
 

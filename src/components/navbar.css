@@ -1,0 +1,37 @@
+.navbar-container {
+  background-color: #333; 
+  color: white; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-list-item {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.navbar-list-item:hover {
+  color: #ff9900; 
+}
+
+.navbar-cart {
+  font-size: 20px;
+}
+
+.cart-icon {
+  font-size: 24px;
+  margin-left: 10px;
+}
