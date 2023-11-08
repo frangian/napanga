@@ -1,14 +1,25 @@
-import ItemListContainer from './components/ItemListContainer'
-import NavBar from './components/NavBar'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/layout/layout/Layout";
+import { routes } from "./router/routes.js"
 
 function App() {
-
   return (
     <>
-    <NavBar/>
-    <ItemListContainer greetings={"hello"}/>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout/>}>
+          {
+              routes.map(({id, path, Element})=>(
+                <Route key={id} path={path} element={<Element/>}/>
+              ))
+            }
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {/* <NavBar />
+      <ItemListContainer greetings={"hello"} /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

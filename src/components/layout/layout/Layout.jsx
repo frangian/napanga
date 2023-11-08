@@ -6,9 +6,9 @@ const Layout = () => {
   return (
     <div>
       <NavBar/>
-      <div style={{ minHeight: "calc(100vh - 156px - 272px)" }}>
+      {/* <div style={{ minHeight: "calc(100vh - 156px - 272px)" }}> */}
         <Outlet />
-      </div>
+      {/* </div> */}
 
     </div>
   )
