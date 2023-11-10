@@ -1,11 +1,12 @@
-import ItemListContainer from "../itemList/ItemListContainer";
+import './home.css'
+import home from '../../../assets/napanga_home.jpg'
 
 const Home = () => {
   return (
-    <div>
-      <h1>home</h1>
-      <ItemListContainer greetings={"hello"} />
-    </div>
+    <>
+      <img style={{ width: '100vw' }} src={home} alt="" />
+      
+    </>
   );
 };
 

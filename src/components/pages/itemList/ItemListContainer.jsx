@@ -1,8 +1,8 @@
 import ItemList from "./ItemList";
 
-const ItemListContainer = (props) => {
+const ItemListContainer = () => {
   return <div>
-    <ItemList greetings={props.greetings}/>
+    <ItemList greetings={"hello"}/>
     </div>;
 };
 

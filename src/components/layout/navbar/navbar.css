@@ -1,6 +1,6 @@
 .navbar-container {
   background-color: #333; 
-  color: white; 
+  color: #72A184; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,4 +34,11 @@
 .cart-icon {
   font-size: 24px;
   margin-left: 10px;
+}
+
+.navbar-list-item,
+.navbar-list-item a,
+.navbar-list-item a:hover { 
+  text-decoration: none; 
+  color: inherit; 
 }
