@@ -1,10 +1,11 @@
 .navbar-container {
-  background-color: #333; 
-  color: #72A184; 
+  background-color: #333;
+  color: #72A184;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  height: 80px;
 }
 
 .navbar-logo {
@@ -21,10 +22,38 @@
 .navbar-list-item {
   cursor: pointer;
   transition: color 0.2s;
+  position: relative;
 }
 
 .navbar-list-item:hover {
-  color: #ff9900; 
+  color: #ff9900;
+}
+
+.navbar-products-dropdown {
+  position: relative;
+}
+
+.navbar-products-dropdown .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1;
+}
+
+.navbar-products-dropdown .dropdown-menu a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navbar-products-dropdown .dropdown-menu a:hover {
+  color: #ff9900;
 }
 
 .navbar-cart {
@@ -38,7 +67,7 @@
 
 .navbar-list-item,
 .navbar-list-item a,
-.navbar-list-item a:hover { 
-  text-decoration: none; 
-  color: inherit; 
+.navbar-list-item a:hover {
+  text-decoration: none;
+  color: inherit;
 }

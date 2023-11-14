@@ -1,17 +1,15 @@
-import NavBar from "../navbar/NavBar"
+import NavBar from "../navbar/NavBar";
 import { Outlet } from "react-router-dom";
-
 
 const Layout = () => {
   return (
     <div>
-      <NavBar/>
-      {/* <div style={{ minHeight: "calc(100vh - 156px - 272px)" }}> */}
+      <NavBar />
+      <div style={{ minHeight: "calc(100vh - 80px )" }}>
         <Outlet />
-      {/* </div> */}
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -1,0 +1,48 @@
+.item-container {
+  display: flex;
+  border: 1px solid #ccc;
+  margin: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.item-container:hover {
+  transform: scale(1.03);
+}
+
+.item-image {
+  width: 250px;
+  object-fit: cover;
+}
+
+.item-details {
+  flex: 1;
+  padding: 20px;
+}
+
+.item-name {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.item-capacity,
+.item-description,
+.item-price,
+.item-category {
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  color: #666;
+}
+
+.item-price {
+  font-weight: bold;
+  color: #e44d26; 
+}
+
+.item-category {
+  font-style: italic;
+}
+

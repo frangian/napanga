@@ -1,0 +1,53 @@
+.products-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  align-items: center;
+  max-width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.products {
+  display: flex;
+  justify-content: center;
+}
+
+.products-container:hover {
+  transform: scale(1.05);
+}
+
+.products-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.products-details {
+  text-align: center;
+}
+
+.products-name {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.products-capacity {
+  color: #666;
+}
+
+.products-description {
+  margin: 5px 0;
+}
+
+.products-price {
+  font-weight: bold;
+  color: #333;
+}
+
+.products-container {
+  flex-direction: row;
+}
+
+.products-container + .products-container {
+  margin-left: 20px;
+}
