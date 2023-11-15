@@ -8,7 +8,8 @@ const productList = [
     characteristics: 'Tela resistente de 180gr, transpirable y lavable. Ideal para: produccion',
     image: macetaImg,
     price: "$600",
-    category: "Produccion"
+    category: "Produccion",
+    stock:10
   },
   {
     id:2,
@@ -17,7 +18,8 @@ const productList = [
     characteristics: 'Tela resistente de 180gr, transpirable y lavable. Ideal para: produccion',
     image: macetaImg,
     price: "$1000",
-    category: "Produccion"
+    category: "Produccion",
+    stock:8
   },
   {
     id:3,
@@ -26,7 +28,8 @@ const productList = [
     characteristics: 'Tela resistente de 300gr, transpirable y lavable. Ideal para: Hierbas aromáticas y pequeñas flores',
     image: macetaImg,
     price: "$1500",
-    category: "Deco"
+    category: "Deco",
+    stock:5
   }
 ]
 

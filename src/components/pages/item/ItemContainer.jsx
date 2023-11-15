@@ -6,7 +6,22 @@ import { useEffect, useState } from "react";
 
 const ItemContainer = () => {
   const [item, setItem] = useState({});
+  const [count, setCount] = useState(0);
   const { itemId } = useParams();
+
+  const addCount = () => {
+    if (count < item.stock) {
+      setCount(count + 1);
+    } else {
+      console.log("No hay suficiente stock disponible");
+    }
+  };
+
+  const subCount = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +52,12 @@ const ItemContainer = () => {
 
   return (
     <>
-      <Item product={item} />
+      <Item
+        product={item}
+        count={count}
+        addCount={addCount}
+        subCount={subCount}
+      />
     </>
   );
 };
