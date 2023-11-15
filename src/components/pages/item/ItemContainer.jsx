@@ -9,16 +9,31 @@ const ItemContainer = () => {
   const { itemId } = useParams();
 
   useEffect(() => {
-    const productById = data.find((product) => product.id == itemId);
+    const fetchData = async () => {
+      try {
+        const myPromise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(data);
+          }, 2000);
+        });
 
-    if (productById) {
-      setItem(productById);
-    } else {
-      console.error(`No se encontró un producto con el ID ${itemId}`);
-    }
+        const response = await myPromise;
+        const productById = response.find((product) => product.id == itemId);
+
+        if (productById) {
+          setItem(productById);
+        } else {
+          console.error(`No se encontró un producto con el ID ${itemId}`);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, [itemId]);
 
-  console.log(item);
+  // console.log(item);
 
   return (
     <>

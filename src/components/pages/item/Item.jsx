@@ -1,7 +1,7 @@
 import './item.css';
 
 const Item = ({product}) => {
-  console.log(product);
+  // console.log(product);
   return (
     <div className="item-container">
       <img src={product.image} alt={product.title} className="item-image" />
