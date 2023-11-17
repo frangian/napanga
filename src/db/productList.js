@@ -1,6 +1,6 @@
 import macetaImg from '../assets/maceta.jpg'
 
-const productList = [
+export const productList = [
   {
     id:1,
     title:'P1',
@@ -33,4 +33,4 @@ const productList = [
   }
 ]
 
-export default productList;
+export const productsCategories = [...new Set(productList.map(product => product.category))];

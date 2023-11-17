@@ -1,6 +1,6 @@
-import './itemList.css'
+import "./itemList.css";
 import ItemList from "./ItemList";
-import data from "../../../db/productList.js";
+import { productList } from "../../../db/productList.js";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -13,15 +13,15 @@ const ItemListContainer = () => {
       try {
         const myPromise = new Promise((resolve, reject) => {
           setTimeout(() => {
-            resolve(data);
+            resolve(productList);
           }, 2000);
         });
-  
+
         const response = await myPromise;
-  
+
         if (categoryId) {
           const productsFilteredByCategory = response.filter(
-            (product) => product.category === categoryId
+            (product) => product.category == categoryId
           );
           setProducts(productsFilteredByCategory);
         } else {
@@ -31,9 +31,9 @@ const ItemListContainer = () => {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
-  }, [categoryId, data]);
+  }, [categoryId, productList]);
 
   return (
     <div className="products">

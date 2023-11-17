@@ -1,6 +1,6 @@
 import "./item.css";
 import Item from "./Item";
-import data from "../../../db/productList.js";
+import { productList } from "../../../db/productList.js";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -28,7 +28,7 @@ const ItemContainer = () => {
       try {
         const myPromise = new Promise((resolve, reject) => {
           setTimeout(() => {
-            resolve(data);
+            resolve(productList);
           }, 2000);
         });
 
