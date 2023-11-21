@@ -1,6 +1,14 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* outline: 1px solid red; */
+}
+
+p, h1, h2, button {
+  font-family: 'Indie Flower';
 }
