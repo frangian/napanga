@@ -9,34 +9,34 @@ const ItemListContainer = () => {
   const { categoryId } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
+    // const fetchData = async () => {
       try {
-        const myPromise = new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(productList);
-          }, 2000);
-        });
+        // const myPromise = new Promise((resolve, reject) => {
+        //   setTimeout(() => {
+        //     resolve(productList);
+        //   }, 2000);
+        // });
 
-        const response = await myPromise;
+        // const response = await myPromise;
 
         if (categoryId) {
-          const productsFilteredByCategory = response.filter(
+          const productsFilteredByCategory = productList.filter(
             (product) => product.category == categoryId
           );
           setProducts(productsFilteredByCategory);
         } else {
-          setProducts(response);
+          setProducts(productList);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
+    // };
 
-    fetchData();
+    // fetchData();
   }, [categoryId, productList]);
 
   return (
-    <div className="products">
+    <div style={{ display: "flex", justifyContent: "center" }}>
       {products.map((eachProduct) => (
         <ItemList
           key={eachProduct.id}

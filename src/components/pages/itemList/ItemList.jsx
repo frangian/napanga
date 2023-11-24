@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import "./itemList.css";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const ItemList = ({ id, title, capacity, characteristics, image, price }) => {
   return (
@@ -11,10 +12,10 @@ const ItemList = ({ id, title, capacity, characteristics, image, price }) => {
           <p className="products-capacity">Capacidad: {capacity}</p>
           <p className="products-description">{characteristics}</p>
           <p className="products-price">Precio: {price}</p>
-        </div>
+          </div>
         <Link to={`/item/${id}`}>
-          <button style={{ margin: "10px 50px" }}>Mas informacion</button>
-        </Link>
+          <Button sx={{ margin: "10px 50px" }}>Mas información</Button>
+          </Link>
       </div>
     </>
   );
