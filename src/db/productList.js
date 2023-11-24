@@ -7,8 +7,8 @@ export const productList = [
     capacity:"5 litros",
     characteristics: 'Tela resistente de 180gr, transpirable y lavable. Ideal para: produccion',
     image: macetaImg,
-    price: "$600",
-    category: "Produccion",
+    price: 600,
+    category: "Cultivo",
     stock:10
   },
   {
@@ -17,8 +17,8 @@ export const productList = [
     capacity:"10 litros",
     characteristics: 'Tela resistente de 180gr, transpirable y lavable. Ideal para: produccion',
     image: macetaImg,
-    price: "$1000",
-    category: "Produccion",
+    price: 1000,
+    category: "Cultivo",
     stock:8
   },
   {
@@ -27,10 +27,12 @@ export const productList = [
     capacity:"16 litros",
     characteristics: 'Tela resistente de 300gr, transpirable y lavable. Ideal para: Hierbas aromáticas y pequeñas flores',
     image: macetaImg,
-    price: "$1500",
+    price: 1500,
     category: "Deco",
     stock:5
   }
 ]
 
-export const productsCategories = [...new Set(productList.map(product => product.category))];
+export const productsCategories = [...new Set(["Todos", ...productList.map(product => product.category)])];
+
+
