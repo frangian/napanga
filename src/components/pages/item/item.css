@@ -46,3 +46,20 @@
   font-style: italic;
 }
 
+.cart-container {
+  width: 320px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.addSubNumber-container {
+  width: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* .addToCart-button {
+} */
+

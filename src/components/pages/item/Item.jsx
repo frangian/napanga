@@ -1,22 +1,189 @@
 import "./item.css";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Box, Button } from "@mui/material";
+import { customTheme } from "../../../themeconfig";
 
-const Item = ({ product, count, addCount, subCount }) => {
+// const ExpandMore = styled((props) => {
+//   const { expand, ...other } = props;
+//   return <IconButton {...other} />;
+// })(({ theme, expand }) => ({
+//   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+//   marginLeft: "auto",
+//   transition: theme.transitions.create("transform", {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }));
+
+const Item = ({ product, count, cart, addCount, subCount, addToCart, handleStock }) => {
+  // const [expanded, setExpanded] = React.useState(false);
+
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
+
+  const AddSubButton = ({ onClick, children }) => (
+    <button
+      onClick={onClick}
+      style={{
+        height: "50px",
+        width: "40px",
+        backgroundColor: "#FFF",
+        color: "#2A332D",
+      }}
+    >
+      {children}
+    </button>
+  );
 
   return (
-    <div className="item-container">
-      <img src={product.image} alt={product.title} className="item-image" />
-      <div className="item-details">
-        <h2 className="item-name">{product.title}</h2>
-        <p className="item-capacity">Capacidad: {product.capacity}</p>
-        <p className="item-description">{product.characteristics}</p>
-        <p className="item-price">Precio: {product.price}</p>
-        <p className="item-category">Categoría: {product.category}</p>
-        <p className="item-stock">Stock Disponible: {product.stock}</p>
-      </div>
-      <button onClick={addCount}>+</button>
-      <span>{count}</span>
-      <button onClick={subCount}>-</button>
-    </div>
+    <>
+      <Card
+        sx={{
+          maxWidth: 345,
+          margin: "auto",
+          my: 3,
+        }}
+      >
+        <CardHeader
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={product.title}
+          subheader={`$ ${product.price}`}
+        />
+        <CardMedia
+          component="img"
+          height="250"
+          image={product.image}
+          alt={product.title}
+        />
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="body2" color="text.secondary">
+            {product.characteristics}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            <span style={{ fontSize: 17, fontWeight: 500 }}>Capacidad:</span>{" "}
+            {product.capacity}
+          </Typography>
+          <Box
+            sx={{
+              width: "250px",
+              margin: "5px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box
+              sx={{
+                width: "120px",
+                display: "flex",
+                padding: 0,
+                outline: "1px solid #2A332D",
+                borderRadius: 30,
+              }}
+            >
+              <AddSubButton onClick={addCount}>+</AddSubButton>
+              <span
+                style={{
+                  height: "50px",
+                  width: "40px",
+                  lineHeight: "300%",
+                  textAlign: "center",
+                  fontFamily: "Indie Flower",
+                }}
+              >
+                {count}
+              </span>
+              <AddSubButton onClick={subCount}>-</AddSubButton>
+            </Box>
+            <Button
+              onClick={addToCart}
+              sx={{
+                height: "50px",
+                width: "120px",
+                borderRadius: 30,
+                lineHeight: 1.1,
+                fontSize: 13,
+              }}
+            >
+              Agregar al carrito
+            </Button>
+          </Box>
+          <Typography>Stock Disponible: {handleStock()}</Typography>
+        </CardContent>
+        {/* <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>Method:</Typography>
+            <Typography paragraph>
+              Heat 1/2 cup of the broth in a pot until simmering, add saffron
+              and set aside for 10 minutes.
+            </Typography>
+            <Typography paragraph>
+              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
+              over medium-high heat. Add chicken, shrimp and chorizo, and cook,
+              stirring occasionally until lightly browned, 6 to 8 minutes.
+              Transfer shrimp to a large plate and set aside, leaving chicken
+              and chorizo in the pan. Add pimentón, bay leaves, garlic,
+              tomatoes, onion, salt and pepper, and cook, stirring often until
+              thickened and fragrant, about 10 minutes. Add saffron broth and
+              remaining 4 1/2 cups chicken broth; bring to a boil.
+            </Typography>
+            <Typography paragraph>
+              Add rice and stir very gently to distribute. Top with artichokes
+              and peppers, and cook without stirring, until most of the liquid
+              is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
+              reserved shrimp and mussels, tucking them down into the rice, and
+              cook again without stirring, until mussels have opened and rice is
+              just tender, 5 to 7 minutes more. (Discard any mussels that
+              don&apos;t open.)
+            </Typography>
+            <Typography>
+              Set aside off of the heat to let rest for 10 minutes, and then
+              serve.
+            </Typography>
+          </CardContent>
+        </Collapse> */}
+      </Card>
+    </>
   );
 };
 
