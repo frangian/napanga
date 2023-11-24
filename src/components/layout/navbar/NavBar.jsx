@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import CartWidget from "../../common/CartWidget";
-// import "./navbar.css";
 import logo from "../../../assets/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,25 +14,20 @@ import Container from "@mui/material/Container";
 // import Button from "@mui/material/Button";
 // import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { customTheme } from "../../../themeconfig";
 import { routes } from "../../../router/routes.js";
 import { productsCategories } from "../../../db/productList.js";
+import { styled, alpha } from "@mui/material/styles";
 
 // const settings = ["Profile", "Cuenta", "Logout"];
 
 const Navbar = () => {
   const routesFilteredByType = routes.filter((route) => route.type === "pages");
   const logoImage = <img src={logo} alt="logo" style={{ width: "120px" }} />;
-  const [anchorElMenu, setAnchorElMenu] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
   // const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const handleOpenMenu = (event) => {
-    setAnchorElMenu(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setAnchorElMenu(null);
-  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -51,10 +45,61 @@ const Navbar = () => {
   //   setAnchorElUser(null);
   // };
 
+  // const calculateTotalItems = () => {
+  //   return cart.reduce((total, item) => total + item.quantity, 0);
+  // };
+
+  // ----------------------- Search bar config ------------------------//
+  const Search = styled("div")(({ theme }) => ({
+    height: "40px",
+    width: "250px",
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+  }));
+
+  const SearchIconWrapper = styled("div")(() => ({
+    height: "100%",
+    width: "40px",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+  }));
+
+  const StyledInputBase = styled(InputBase)(() => ({
+    color: customTheme.palette.primary.white,
+    height: "100%",
+    width: "100%",
+    marginLeft: "40px",
+  }));
+  // ----------------------- fin search bar config ------------------- //
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#2a332d" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="sticky">
+      <Container
+        maxWidth="xl"
+        sx={{
+          backgroundColor: customTheme.palette.green.dark,
+          width: "100%",
+          height: "64px",
+          px: 4,
+        }}
+        disableGutters
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+          disableGutters
+        >
           {/* ------------------Logo------------------------------- */}
           <Box
             sx={{
@@ -129,76 +174,18 @@ const Navbar = () => {
           <Box
             sx={{
               flexGrow: 1,
+              maxWidth: "250px",
               display: { xs: "none", md: "flex" },
-              justifyContent: "center",
+              justifyContent: "space-around",
               alignItems: "center",
+              color: customTheme.palette.green.light,
             }}
           >
-            {routesFilteredByType.map((page) =>
-              page.id === "products" ? (
-                <Box key={page.id} sx={{ mx: 2, cursor: "pointer" }}>
-                  <Typography
-                    // size="large"
-                    // aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    // aria-haspopup="true"
-                    onClick={handleOpenMenu}
-                    // color="inherit"
-                  >
-                    {page.title}
-                  </Typography>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElMenu}
-                    // anchorOrigin={{
-                    //   vertical: "bottom",
-                    //   horizontal: "left",
-                    // }}
-                    keepMounted
-                    // transformOrigin={{
-                    //   vertical: "top",
-                    //   horizontal: "left",
-                    // }}
-                    open={Boolean(anchorElMenu)}
-                    onClose={handleCloseMenu}
-                    sx={{
-                      display: { xs: "none", md: "block" },
-                    }}
-                  >
-                    {productsCategories.map((category) => (
-                      <MenuItem key={category} onClick={handleCloseNavMenu}>
-                        <Link
-                          to={`products/${category}`}
-                          style={{
-                            textDecoration: "none",
-                            color: "black",
-                          }}
-                        >
-                          {category}
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </Box>
-              ) : (
-                <Typography
-                  key={page.id}
-                  onClick={handleCloseNavMenu}
-                  // sx={{ mx: 2 }}
-                >
-                  <Link
-                    to={page.path}
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      display: "block",
-                    }}
-                  >
-                    {page.title}
-                  </Link>
-                </Typography>
-              )
-            )}
+            {routesFilteredByType.map((page) => (
+              <Typography key={page.id} onClick={handleCloseNavMenu}>
+                <Link to={page.path}>{page.title}</Link>
+              </Typography>
+            ))}
           </Box>
 
           {/* ------------------Icono cuenta----------------------- */}
@@ -238,36 +225,58 @@ const Navbar = () => {
 
           {/* ------------------Icono carrito---------------------- */}
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton
-              // onClick={handleOpenUserMenu}
-              sx={{ p: 1, color: "white" }}
-            >
-              <CartWidget />
+            <IconButton >
+              <Link to={"/cart"}>
+                <CartWidget />
+              </Link>
             </IconButton>
-            {/* <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
           </Box>
         </Toolbar>
+      </Container>
+      <Container
+        maxWidth="xl"
+        sx={{
+          height: "64px",
+          backgroundColor: customTheme.palette.green.light,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          px: 4,
+        }}
+        disableGutters
+      >
+        {/* ------------------------ categorias --------------------------- */}
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            // margin: 2,
+          }}
+        >
+          <Typography color={{ color: customTheme.palette.green.dark }}>
+            Categorias:{" "}
+          </Typography>
+          {productsCategories.map((category) => (
+            <Typography key={category} sx={{ marginLeft: "15px" }}>
+              <Link
+                to={category === "Todos" ? "/products" : `products/${category}`}
+                style={{ color: customTheme.palette.primary.whiteGrey }}
+              >
+                {category}
+              </Link>
+            </Typography>
+          ))}
+        </Box>
+
+        {/* ------------------------ search bar --------------------------- */}
+        <Search>
+          <SearchIconWrapper sx={{ cursor: "pointer" }}>
+            <SearchIcon sx={{ cursor: "pointer" }} />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
       </Container>
     </AppBar>
   );
