@@ -3,16 +3,21 @@ import { createTheme } from "@mui/material";
 export const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#000",
-      second: "#FFFFFF",
-      navbar: "#F2F3F4",
+      main: "#2A332D",
+      white: "#FFF",
+      black: "#000",
+      whiteGrey: "#F2F3F4",
     },
-    secondary: {
-      main: "#72A184",
+    green: {
+      light: "#72A184",
+      dark: "#2A332D"
     },
-    third: {
+    button: {
       main: "#2A332D",
     },
+  },
+  typography: {
+    fontFamily: "Indie Flower",
   },
   components: {
     MuiButton: {
@@ -22,7 +27,13 @@ export const customTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          textTransform: "none",
+          background: "#2A332D",
+          border: 0,
+          borderRadius: 3,
+          boxShadow: '0 3px 5px 2px rgba(#FFFFFF .3)',
+          color: '#72A184',
+          height: 48,
+          padding: '20px',
         },
       },
     },

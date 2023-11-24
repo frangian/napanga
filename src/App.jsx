@@ -1,20 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./components/layout/layout/Layout";
-import { routes } from "./router/routes.js"
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
+import { customTheme } from "./themeconfig";
+import AppRouter from "./router/AppRouter.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route element={<Layout/>}>
-          {
-              routes.map(({id, path, Element})=>(
-                <Route key={id} path={path} element={<Element/>}/>
-              ))
-            }
-          </Route>
-        </Routes>
+        <ThemeProvider theme={customTheme}>
+          <CartProvider>
+            <AppRouter />
+          </CartProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </>
   );
