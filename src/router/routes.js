@@ -1,3 +1,4 @@
+import CartContainer from "../components/pages/cart/CartContainer";
 import ContactContainer from "../components/pages/contact/ContactContainer";
 import HomeContainer from "../components/pages/home/HomeContainer";
 import ItemContainer from "../components/pages/item/ItemContainer";
@@ -38,5 +39,12 @@ export const routes = [
     type: 'link',
     path: "/item/:itemId",
     Element: ItemContainer,
+  },
+  {
+    id: "cart",
+    title: "Cart",
+    type: 'link',
+    path: "/cart",
+    Element: CartContainer,
   }
 ];
