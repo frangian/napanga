@@ -24,6 +24,7 @@ import { styled, alpha } from "@mui/material/styles";
 // const settings = ["Profile", "Cuenta", "Logout"];
 
 const Navbar = () => {
+  console.log('navbar render');
   const routesFilteredByType = routes.filter((route) => route.type === "pages");
   const logoImage = <img src={logo} alt="logo" style={{ width: "120px" }} />;
   const [anchorElNav, setAnchorElNav] = useState(null);
