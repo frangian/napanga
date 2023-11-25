@@ -20,6 +20,13 @@ export const customTheme = createTheme({
     fontFamily: "Indie Flower",
   },
   components: {
+    // MuiBadge: {
+    //   styleOverrides: {
+    //     root: (props) => ({
+    //       ...(props.color = "#72A184" && { backgroundColor: "#2A332D" }),
+    //     }),
+    //   },
+    // },
     MuiButton: {
       defaultProps: {
         variant: "contained",
@@ -30,10 +37,10 @@ export const customTheme = createTheme({
           background: "#2A332D",
           border: 0,
           borderRadius: 3,
-          boxShadow: '0 3px 5px 2px rgba(#FFFFFF .3)',
-          color: '#72A184',
+          boxShadow: "0 3px 5px 2px rgba(#FFFFFF .3)",
+          color: "#72A184",
           height: 48,
-          padding: '20px',
+          padding: "20px",
         },
       },
     },
