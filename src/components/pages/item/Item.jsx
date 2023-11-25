@@ -29,7 +29,7 @@ import { customTheme } from "../../../themeconfig";
 //   }),
 // }));
 
-const Item = ({ product, count, cart, addCount, subCount, addToCart, handleStock }) => {
+const Item = ({ product, count, addCount, subCount, addToCart, handleStock }) => {
   // const [expanded, setExpanded] = React.useState(false);
 
   // const handleExpandClick = () => {

@@ -9,12 +9,13 @@ const ItemContainer = () => {
   const { itemId } = useParams();
   const [item, setItem] = useState({});
   const [count, setCount] = useState(0);
-  const { cart, eachItemInCartStock, addToCart } = useCart();
+  const { existingItemCart, eachItemInCartStock, addToCart } = useCart();
 
 console.log("item container render");
 
   const addCount = () => {
-    if (count < item.stock) {
+    const itemStock = existingItemCart(item) ? existingItemCart(item).stock : item.stock 
+    if (count < itemStock) {
       setCount(count + 1);
     } else {
       console.log("No hay suficiente stock disponible");
@@ -29,14 +30,13 @@ console.log("item container render");
 
   const handleAddToCart = () => {
     addToCart(count, item);
+    setCount(0)
   };
 
   const handleStock = () => {
-    return eachItemInCartStock(item)
+    const itemStock = eachItemInCartStock(item);
+    return itemStock !== undefined ? itemStock : item.stock
   };
-
-  console.log(cart);
-  console.log(handleStock());
 
   useEffect(() => {
     // const fetchData = async () => {
@@ -52,7 +52,6 @@ console.log("item container render");
 
         if (productById) {
           setItem(productById);
-          console.log('algo');
         } else {
           console.error(`No se encontró un producto con el ID ${itemId}`);
         }
@@ -71,7 +70,6 @@ console.log("item container render");
       <Item
         product={item}
         count={count}
-        cart={cart}
         addCount={addCount}
         subCount={subCount}
         addToCart={handleAddToCart}
