@@ -10,25 +10,21 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-// import Avatar from "@mui/material/Avatar";
-// import Button from "@mui/material/Button";
-// import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { customTheme } from "../../../themeconfig";
 import { routes } from "../../../router/routes.js";
-import { productsCategories } from "../../../db/productList.js";
 import { styled, alpha } from "@mui/material/styles";
-
-// const settings = ["Profile", "Cuenta", "Logout"];
+import { db } from "../../../firebaseConfig.js";
+import { getDocs, collection } from "firebase/firestore";
 
 const Navbar = () => {
-  console.log('navbar render');
+  console.log("navbar render");
   const routesFilteredByType = routes.filter((route) => route.type === "pages");
   const logoImage = <img src={logo} alt="logo" style={{ width: "120px" }} />;
   const [anchorElNav, setAnchorElNav] = useState(null);
-  // const [anchorElUser, setAnchorElUser] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,18 +33,6 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
-
-  // const calculateTotalItems = () => {
-  //   return cart.reduce((total, item) => total + item.quantity, 0);
-  // };
 
   // ----------------------- Search bar config ------------------------//
   const Search = styled("div")(({ theme }) => ({
@@ -80,6 +64,25 @@ const Navbar = () => {
     marginLeft: "40px",
   }));
   // ----------------------- fin search bar config ------------------- //
+
+  useEffect(() => {
+    try {
+      const refCollection = collection(db, "productList");
+      getDocs(refCollection)
+        .then((res) => {
+          const categoryList = [
+            ...new Set([
+              "Todos",
+              ...res.docs.map((product) => product.data().category),
+            ]),
+          ];
+          setCategories(categoryList);
+        })
+        .catch();
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
 
   return (
     <AppBar position="sticky">
@@ -189,44 +192,9 @@ const Navbar = () => {
             ))}
           </Box>
 
-          {/* ------------------Icono cuenta----------------------- */}
-          {/* <Box sx={{ flexGrow: 0, mx:1 }}>
-            <Tooltip >
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/src/assets/logo_maceta.svg"
-                  sx={{ width: "20px", height: "auto" }}
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
-
           {/* ------------------Icono carrito---------------------- */}
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton >
+            <IconButton>
               <Link to={"/cart"}>
                 <CartWidget />
               </Link>
@@ -256,7 +224,7 @@ const Navbar = () => {
           <Typography color={{ color: customTheme.palette.green.dark }}>
             Categorias:{" "}
           </Typography>
-          {productsCategories.map((category) => (
+          {categories.map((category) => (
             <Typography key={category} sx={{ marginLeft: "15px" }}>
               <Link
                 to={category === "Todos" ? "/products" : `products/${category}`}

@@ -1,9 +1,10 @@
 import "./item.css";
 import Item from "./Item";
-import { productList } from "../../../db/productList.js";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCart } from "../../../context/CartContext.jsx";
+import { db } from "../../../firebaseConfig.js";
+import { getDoc, doc } from "firebase/firestore";
 
 const ItemContainer = () => {
   const { itemId } = useParams();
@@ -11,10 +12,12 @@ const ItemContainer = () => {
   const [count, setCount] = useState(0);
   const { existingItemCart, eachItemInCartStock, addToCart } = useCart();
 
-console.log("item container render");
+  console.log("item container render");
 
   const addCount = () => {
-    const itemStock = existingItemCart(item) ? existingItemCart(item).stock : item.stock 
+    const itemStock = existingItemCart(item)
+      ? existingItemCart(item).stock
+      : item.stock;
     if (count < itemStock) {
       setCount(count + 1);
     } else {
@@ -30,40 +33,30 @@ console.log("item container render");
 
   const handleAddToCart = () => {
     addToCart(count, item);
-    setCount(0)
+    setCount(0);
   };
 
   const handleStock = () => {
     const itemStock = eachItemInCartStock(item);
-    return itemStock !== undefined ? itemStock : item.stock
+    return itemStock !== undefined ? itemStock : item.stock;
   };
 
   useEffect(() => {
-    // const fetchData = async () => {
-      try {
-        // const myPromise = new Promise((resolve, reject) => {
-        //   setTimeout(() => {
-        //     resolve(productList);
-        //   }, 2000);
-        // });
+    try {
+      const refDoc = doc(db, "productList", itemId);
 
-        // const response = await myPromise;
-        const productById = productList.find((product) => product.id == itemId);
+      getDoc(refDoc)
+        .then((res) => {
+          return res.data()
+            ? setItem({ ...res.data(), id: res.id })
+            : console.error(`No se encontró un producto con el ID ${itemId}`);
+        })
+        .catch((err) => console.error(err));
 
-        if (productById) {
-          setItem(productById);
-        } else {
-          console.error(`No se encontró un producto con el ID ${itemId}`);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    // };
-
-    // fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }, [itemId]);
-
-  // console.log(item);
 
   return (
     <>

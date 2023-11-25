@@ -1,39 +1,35 @@
 import "./itemList.css";
 import ItemList from "./ItemList";
-import { productList } from "../../../db/productList.js";
+// import { productList } from "../../../db/productList.js";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { db } from "../../../firebaseConfig.js";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const { categoryId } = useParams();
 
   useEffect(() => {
-    // const fetchData = async () => {
-      try {
-        // const myPromise = new Promise((resolve, reject) => {
-        //   setTimeout(() => {
-        //     resolve(productList);
-        //   }, 2000);
-        // });
-
-        // const response = await myPromise;
-
-        if (categoryId) {
-          const productsFilteredByCategory = productList.filter(
-            (product) => product.category == categoryId
-          );
-          setProducts(productsFilteredByCategory);
-        } else {
+    try {
+      const refCollection = categoryId
+        ? query(
+            collection(db, "productList"),
+            where("category", "==", categoryId)
+          )
+        : collection(db, "productList");
+      getDocs(refCollection)
+        .then((res) => {
+          const productList = res.docs.map((product) => {
+            return { ...product.data(), id: product.id };
+          });
           setProducts(productList);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    // };
-
-    // fetchData();
-  }, [categoryId, productList]);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [categoryId]);
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
