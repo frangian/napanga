@@ -1,6 +1,5 @@
 import Cart from "./Cart";
 import { useCart } from "../../../context/CartContext.jsx";
-import { useEffect, useState } from "react";
 
 const CartContainer = () => {
   const {
