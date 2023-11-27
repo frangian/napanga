@@ -8,8 +8,14 @@ import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
 
-const Item = ({ product, count, addCount, subCount, addToCart, handleStock }) => {
-
+const Item = ({
+  product,
+  count,
+  addCount,
+  subCount,
+  addToCart,
+  handleStock,
+}) => {
   // const handleExpandClick = () => {
   //   setExpanded(!expanded);
   // };
@@ -83,7 +89,8 @@ const Item = ({ product, count, addCount, subCount, addToCart, handleStock }) =>
                 borderRadius: 30,
               }}
             >
-              <AddSubButton onClick={addCount}>+</AddSubButton>
+              <AddSubButton onClick={subCount}>-</AddSubButton>
+
               <span
                 style={{
                   height: "50px",
@@ -95,7 +102,7 @@ const Item = ({ product, count, addCount, subCount, addToCart, handleStock }) =>
               >
                 {count}
               </span>
-              <AddSubButton onClick={subCount}>-</AddSubButton>
+              <AddSubButton onClick={addCount}>+</AddSubButton>
             </Box>
             <Button
               onClick={addToCart}
