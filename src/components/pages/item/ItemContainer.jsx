@@ -12,8 +12,6 @@ const ItemContainer = () => {
   const [count, setCount] = useState(0);
   const { existingItemCart, eachItemInCartStock, addToCart } = useCart();
 
-  console.log("item container render");
-
   const addCount = () => {
     const itemStock = existingItemCart(item)
       ? existingItemCart(item).stock
@@ -22,6 +20,7 @@ const ItemContainer = () => {
       setCount(count + 1);
     } else {
       console.log("No hay suficiente stock disponible");
+      alert("No hay suficiente stock disponible");
     }
   };
 
@@ -32,6 +31,11 @@ const ItemContainer = () => {
   };
 
   const handleAddToCart = () => {
+    if (count === 0) {
+      console.log("no se puede agregar 0 productos al carrito");
+      alert("No se agrego ningun producto al carrito");
+      return;
+    }
     addToCart(count, item);
     setCount(0);
   };

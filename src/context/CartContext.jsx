@@ -7,8 +7,6 @@ export const CartProvider = ({ children }) => {
     JSON.parse(sessionStorage.getItem("cart") || "[]")
   );
 
-  console.log("cartContext render");
-
   const existingItemIndex = (existingCart, item) => {
     const existingItemIndex = existingCart.findIndex(
       (cartItem) => cartItem.id === item.id
@@ -34,20 +32,12 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = (count, item) => {
-    console.log("entro al addto.. del contexto");
-    // 1. chequeo de que se intente agregar algo al carrito y no 0
-    if (count === 0) {
-      console.log("no se puede agregar 0 productos al carrito");
-      return;
-    }
-    // 2. chequeo de que haya algo ya en el carrito (dentro hay 2 chequeos mas)
+    // 1. chequeo de que haya algo ya en el carrito (dentro hay 2 chequeos mas)
     if (cart.length > 0) {
-      console.log("entro al cart.length > 0");
       const updatedCart = [...cart];
       const index = existingItemIndex(updatedCart, item);
-      // 3. chequeo de que ya exista en el carrito el producto que quiero agregar
+      // 2. chequeo de que ya exista en el carrito el producto que quiero agregar
       if (index !== -1) {
-        console.log("entro aca");
         updatedCart[index] = {
           ...updatedCart[index],
           quantity: updatedCart[index].quantity + count,
@@ -56,7 +46,7 @@ export const CartProvider = ({ children }) => {
         setCart(updatedCart);
         sessionStorage.setItem("cart", JSON.stringify(updatedCart));
       }
-      // 4. chequeo en caso de que no exista el producto, lo agrego al carrito ya existente
+      // 3. chequeo en caso de que no exista el producto, lo agrego al carrito ya existente
       else {
         updatedCart.push({
           ...item,
@@ -67,9 +57,8 @@ export const CartProvider = ({ children }) => {
         sessionStorage.setItem("cart", JSON.stringify(updatedCart));
       }
     }
-    // 5. chequeo en caso de que no haya nada en el carrito
+    // 4. chequeo en caso de que no haya nada en el carrito
     else {
-      console.log("entro al else del cart.length > 0");
       const updatedCart = [
         { ...item, stock: item.stock - count, quantity: count },
       ];

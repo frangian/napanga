@@ -13,12 +13,9 @@ const Item = ({
   count,
   addCount,
   subCount,
-  addToCart,
+  addToCart, 
   handleStock,
 }) => {
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
 
   const AddSubButton = ({ onClick, children }) => (
     <button

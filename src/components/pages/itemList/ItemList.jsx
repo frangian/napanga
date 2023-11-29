@@ -11,7 +11,7 @@ const ItemList = ({ id, title, capacity, characteristics, image, price }) => {
           <h2 className="products-name">{title}</h2>
           <p className="products-capacity">Capacidad: {capacity}</p>
           <p className="products-description">{characteristics}</p>
-          <p className="products-price">Precio: {price}</p>
+          <p className="products-price">Precio: ${price}</p>
           </div>
         <Link to={`/item/${id}`}>
           <Button sx={{ margin: "10px 50px" }}>Mas información</Button>
