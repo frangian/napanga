@@ -1,23 +1,29 @@
+import "./navbar.css";
+import { routes } from "../../../router/routes.js";
 import { Link } from "react-router-dom";
 import CartWidget from "../../common/CartWidget";
 import logo from "../../../assets/logo.png";
 import { useEffect, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import MenuItem from "@mui/material/MenuItem";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { customTheme } from "../../../themeconfig";
-import { routes } from "../../../router/routes.js";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  MenuItem,
+  InputBase,
+  Badge
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { customTheme } from "../../../themeconfig";
 import { db } from "../../../firebaseConfig.js";
 import { getDocs, collection } from "firebase/firestore";
+import { useCart } from "../../../context/CartContext.jsx";
 
 const Navbar = () => {
   console.log("navbar render");
@@ -25,6 +31,10 @@ const Navbar = () => {
   const logoImage = <img src={logo} alt="logo" style={{ width: "120px" }} />;
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [categories, setCategories] = useState([]);
+
+  // CartWidget:
+  const [showCart, setShowCart] = useState(false);
+  const { itemsQuantity } = useCart();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -194,11 +204,41 @@ const Navbar = () => {
 
           {/* ------------------Icono carrito---------------------- */}
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton>
+            {/* <IconButton>
               <Link to={"/cart"}>
                 <CartWidget />
               </Link>
+            </IconButton> */}
+            <IconButton
+              disableRipple
+              onClick={() => {
+                setShowCart(!showCart);
+              }}
+              sx={{ transition: "none" }}
+            >
+              <Badge
+                invisible={itemsQuantity === 0}
+                badgeContent={itemsQuantity}
+                variant="standard"
+                sx={{
+                  "& .css-mbpko5-MuiBadge-badge ": {
+                    fontFamily: "Roboto",
+                    fontWeight: 700,
+                  },
+                }}
+              >
+                <ShoppingCartIcon
+                  style={{ color: customTheme.palette.green.light }}
+                />
+              </Badge>
             </IconButton>
+            {showCart && (
+              <CartWidget
+                // onOrderedQuant={onOrderedQuant}
+                // onReset={onReset}
+                onShow={setShowCart}
+              />
+            )}
           </Box>
         </Toolbar>
       </Container>
