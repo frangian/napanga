@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const ItemList = ({ id, title, capacity, characteristics, image, price }) => {
+  console.log("ItemList render");
+
   return (
     <>
       <div className="products-container">

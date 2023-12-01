@@ -14,7 +14,7 @@ import thumb4 from "../../assets/Pictures/image-product-4-thumbnail.jpg";
 const IMAGES = [prod1, prod2, prod3, prod4];
 const THUMBS = [thumb1, thumb2, thumb3, thumb4];
 
-const Gallery = ({ product }) => {
+const Gallery = () => {
   console.log("Gallery render");
 
   const [currentImage, setCurrentImage] = useState(prod1);
@@ -41,7 +41,7 @@ const Gallery = ({ product }) => {
   useEffect(() => {
     console.log("entro al useEffect de Gallery");
     setCurrentPassedImage(currentImage);
-  }, [currentImage, product]);
+  }, [currentImage]);
 
   return (
     <section className="gallery-holder hide-in-mobile">

@@ -1,15 +1,11 @@
 import "./item.css";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Box, Button } from "@mui/material";
-import Gallery from "../../common/Gallery";
-import MobileGallery from "../../common/MobileGallery";
-import Description from "../../common/Description";
+import { Backdrop, IconButton } from "@mui/material";
+// import { CloseIcon, PreviousIcon, NextIcon, CartIcon, QuantityButton } from "../../../assets/icons";
+import CloseIcon from "../../../assets/icons/CloseIcon";
+import PreviousIcon from "../../../assets/icons/PreviousIcon";
+import NextIcon from "../../../assets/icons/NextIcon";
+import CartIcon from "../../../assets/icons/CartIcon";
+import QuantityButton from "../../common/QuantityButton";
 
 const Item = ({
   product,
@@ -18,105 +14,190 @@ const Item = ({
   subCount,
   addToCart,
   handleStock,
+  open,
+  currentImage,
+  handleClick,
+  handleToggle,
+  handleClose,
+  removeActivatedClass,
+  backdropImage,
+  currentPassedImageIndex,
+  handleClickBG,
+  handleIncrementBG,
+  handleDecrementBG,
+  currentMobileImage,
+  handleIncrement,
+  handleDecrement,
+  THUMBS
+
 }) => {
   console.log("Item render");
 
   return (
     <div className="item-container">
-      <Gallery />
-      <MobileGallery />
-      <Description
-        product={product}
-        onQuant={count}
-        onAdd={addCount}
-        onRemove={subCount}
-        onSetOrderedQuant={addToCart}
-      />
-
-      {/* <Card
-        sx={{
-          maxWidth: 345,
-          margin: "auto",
-          my: 3,
-        }}
-      >
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={product.title}
-          subheader={`$ ${product.price}`}
-        />
-        <CardMedia
-          component="img"
-          height="250"
-          image={product.image}
-          alt={product.title}
-        />
-        <CardContent
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            {product.characteristics}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            <span style={{ fontSize: 17, fontWeight: 500 }}>Capacidad:</span>{" "}
-            {product.capacity}
-          </Typography>
-          <Box
+      <section className="gallery-holder hide-in-mobile">
+        <section className="gallery">
+          <div className="image">
+            <img src={currentImage} alt="product-1" onClick={handleToggle} />
+          </div>
+          <Backdrop
+            className="backdrop"
             sx={{
-              width: "250px",
-              margin: "5px",
-              display: "flex",
-              justifyContent: "space-between",
+              color: "#fff",
+              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
+            open={open}
           >
-            <Box
-              sx={{
-                width: "120px",
-                display: "flex",
-                padding: 0,
-                outline: "1px solid #2A332D",
-                borderRadius: 30,
-              }}
-            >
-              <AddSubButton disabled={count === 0} onClick={subCount}>-</AddSubButton>
-
-              <span
-                style={{
-                  height: "50px",
-                  width: "40px",
-                  lineHeight: "300%",
-                  textAlign: "center",
-                  fontFamily: "Indie Flower",
+            <section className="backdrop-content">
+              <IconButton
+                onClick={handleClose}
+                sx={{
+                  color: "#fff",
+                  bgcolor: "transparent",
+                  alignSelf: "flex-end",
                 }}
               >
-                {count}
-              </span>
-              <AddSubButton onClick={addCount}>+</AddSubButton>
-            </Box>
-            <Button
-              onClick={addToCart}
-              sx={{
-                height: "50px",
-                width: "120px",
-                borderRadius: 30,
-                lineHeight: 1.1,
-                fontSize: 13,
-              }}
-            >
-              Agregar al carrito
-            </Button>
-          </Box>
-          <Typography>Stock Disponible: {handleStock()}</Typography>
-        </CardContent>
-      </Card> */}
+                <CloseIcon fillColor={"#fff"} />
+              </IconButton>
+              <div className="image">
+                <IconButton
+                  className="icon-button-prev"
+                  disableRipple
+                  onClick={() => {
+                    handleDecrementBG();
+                    removeActivatedClass(document.querySelector(".thumbnails"));
+                  }}
+                  sx={{
+                    height: "42px",
+                    width: "42px",
+                    bgcolor: "#fff",
+                  }}
+                >
+                  <PreviousIcon />
+                </IconButton>
+                <IconButton
+                  className="icon-button-next"
+                  disableRipple
+                  onClick={() => {
+                    handleIncrementBG();
+                    removeActivatedClass(document.querySelector(".thumbnails"));
+                  }}
+                  sx={{
+                    height: "42px",
+                    width: "42px",
+                    bgcolor: "#fff",
+                  }}
+                >
+                  <NextIcon />
+                </IconButton>
+                <img
+                  src={backdropImage}
+                  alt="selected-product"
+                  style={{ cursor: "auto" }}
+                />
+              </div>
+              <div className="thumbnails">
+                {THUMBS.map((th, index) => {
+                  return (
+                    <div
+                      className="img-holder-backd"
+                      key={index}
+                      onClick={(e) => {
+                        handleClickBG(index);
+                        removeActivatedClass(e.currentTarget.parentNode);
+                        e.currentTarget.childNodes[0].classList.toggle(
+                          "activated"
+                        );
+                      }}
+                    >
+                      <div
+                        className={`outlay ${
+                          index === currentPassedImageIndex && "activated"
+                        }`}
+                      ></div>
+                      <img src={th} alt={`product-${index + 1}`} />
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </Backdrop>
+          <div className="thumbnails">
+            {THUMBS.map((th, index) => {
+              return (
+                <div
+                  className="img-holder"
+                  key={index}
+                  onClick={(e) => {
+                    handleClick(index);
+                    removeActivatedClass(e.currentTarget.parentNode);
+                    e.currentTarget.childNodes[0].classList.toggle("activated");
+                  }}
+                >
+                  <div className={`outlay ${index === 0 && "activated"}`}></div>
+                  <img src={th} alt={`product-${index + 1}`} />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      </section>
+      <section className="mobile-gallery hide-in-desktop">
+        <IconButton
+          className="icon-button-prev"
+          disableRipple
+          onClick={handleDecrement}
+          sx={{
+            height: "42px",
+            width: "42px",
+            bgcolor: "#fff",
+          }}
+        >
+          <PreviousIcon />
+        </IconButton>
+        <img src={currentMobileImage} alt="featured-product" />
+        <IconButton
+          className="icon-button-next"
+          disableRipple
+          onClick={handleIncrement}
+          sx={{
+            height: "42px",
+            width: "42px",
+            bgcolor: "#fff",
+          }}
+        >
+          <NextIcon />
+        </IconButton>
+      </section>
+      <section className="description">
+        <p className="pre">sneaker company</p>
+        <h1>fall limited edition sneakers</h1>
+        <p className="desc">
+          These low-profile sneakers are your perfect casual wear companion.
+          Featuring a durable rubber outer sole, they’ll withstand everything
+          the weather can offer
+        </p>
+        <div className="price">
+          <div className="main-tag">
+            <p>$125.00</p>
+            <p>50%</p>
+          </div>
+          <s>$250.00</s>
+        </div>
+        <div className="buttons">
+          <QuantityButton onQuant={count} onRemove={subCount} onAdd={addCount} />
+          <button
+            className="add-to-cart"
+            onClick={() => {
+              addToCart();
+            }}
+          >
+            <CartIcon />
+            add to cart
+          </button>
+        </div>
+      </section>
     </div>
   );
 };

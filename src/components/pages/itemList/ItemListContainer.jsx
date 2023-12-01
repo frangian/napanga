@@ -7,10 +7,13 @@ import { db } from "../../../firebaseConfig.js";
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
+  console.log("ItemListContainer render");
+
   const [products, setProducts] = useState([]);
   const { categoryId } = useParams();
 
   useEffect(() => {
+    console.log("entro al useEffect Inicial");
     try {
       const refCollection = categoryId
         ? query(
