@@ -15,39 +15,39 @@ import PreviousIcon from "../../assets/icons/PreviousIcon";
 import NextIcon from "../../assets/icons/NextIcon";
 
 const IMAGES = [prod1, prod2, prod3, prod4];
-const THUMBS = [thumb1, thumb2, thumb3, thumb4];
-const BackdropGallery = ({ open, handleClose, currentPassedImage }) => {
+const images = [thumb1, thumb2, thumb3, thumb4];
+const BackdropGallery = ({ images, open, handleClose, currentPassedImage }) => {
   const [backdropImage, setBackdropImage] = useState(currentPassedImage);
   const [currentPassedImageIndex, setCurrentPassedImageIndex] = useState(1);
 
   useEffect(() => {
     setBackdropImage(currentPassedImage);
-    IMAGES.forEach((imgg, index) => {
+    images.forEach((imgg, index) => {
       imgg === currentPassedImage && setCurrentPassedImageIndex(index);
     });
   }, [currentPassedImage]);
 
   const handleClick = (index = null) => {
-    setBackdropImage(IMAGES[index]);
+    setBackdropImage(images[index]);
     setCurrentPassedImageIndex(index);
   };
 
   const handleIncrement = () => {
-    if (currentPassedImageIndex === IMAGES.length - 1) {
-      setBackdropImage(IMAGES[0]);
+    if (currentPassedImageIndex === images.length - 1) {
+      setBackdropImage(images[0]);
       setCurrentPassedImageIndex(0);
     } else {
-      setBackdropImage(IMAGES[currentPassedImageIndex + 1]);
+      setBackdropImage(images[currentPassedImageIndex + 1]);
       setCurrentPassedImageIndex(currentPassedImageIndex + 1);
     }
   };
 
   const handleDecrement = () => {
     if (currentPassedImageIndex === 0) {
-      setBackdropImage(IMAGES[IMAGES.length - 1]);
-      setCurrentPassedImageIndex(IMAGES.length - 1);
+      setBackdropImage(images[images.length - 1]);
+      setCurrentPassedImageIndex(images.length - 1);
     } else {
-      setBackdropImage(IMAGES[currentPassedImageIndex - 1]);
+      setBackdropImage(images[currentPassedImageIndex - 1]);
       setCurrentPassedImageIndex(currentPassedImageIndex - 1);
     }
   };
@@ -114,7 +114,7 @@ const BackdropGallery = ({ open, handleClose, currentPassedImage }) => {
           />
         </div>
         <div className="thumbnails">
-          {THUMBS.map((th, index) => {
+          {images.map((th, index) => {
             return (
               <div
                 className="img-holder-backd"

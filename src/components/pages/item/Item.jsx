@@ -13,6 +13,7 @@ import Description from "../../common/Description";
 
 const Item = ({
   product,
+  images,
   count,
   addCount,
   subCount,
@@ -20,10 +21,11 @@ const Item = ({
   handleStock,
 }) => {
   console.log("Item render");
+  console.log(product);
 
   return (
     <div className="item-container">
-      <Gallery />
+      <Gallery images={images}/>
       <MobileGallery />
       <Description
         product={product}

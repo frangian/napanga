@@ -10,9 +10,10 @@ const ItemContainer = () => {
   console.log("ItemContainer render");
   const { itemId } = useParams();
   const [item, setItem] = useState({});
+  const [images, setImages] = useState([])
   const [count, setCount] = useState(0);
   const { existingItemCart, eachItemInCartStock, addToCart } = useCart();
-
+console.log(images);
   const addCount = () => {
     const itemStock = existingItemCart(item)
       ? existingItemCart(item).stock
@@ -44,14 +45,19 @@ const ItemContainer = () => {
     return itemStock !== undefined ? itemStock : item.stock;
   };
 
+  const handleImages = (images) => {
+    setImages(images.map((img)=>img.imageUrl))
+  }
+
   useEffect(() => {
+    console.log("entro al useEffect de ItemContainer");
     try {
       const refDoc = doc(db, "productList", itemId);
 
       getDoc(refDoc)
         .then((res) => {
           return res.data()
-            ? setItem({ ...res.data(), id: res.id })
+            ? (setItem({ ...res.data(), id: res.id }), handleImages(res.data().images))
             : console.error(`No se encontró un producto con el ID ${itemId}`);
         })
         .catch((err) => console.error(err));
@@ -60,10 +66,15 @@ const ItemContainer = () => {
     }
   }, [itemId]);
 
+  if (!item.id) {
+    return null; // O puedes mostrar un spinner u otra indicación de carga
+  }
+  console.log(item);
   return (
     <>
       <Item
         product={item}
+        images={images}
         count={count}
         addCount={addCount}
         subCount={subCount}
