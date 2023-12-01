@@ -7,6 +7,7 @@ import { db } from "../../../firebaseConfig.js";
 import { getDoc, doc } from "firebase/firestore";
 
 const ItemContainer = () => {
+  console.log("ItemContainer render");
   const { itemId } = useParams();
   const [item, setItem] = useState({});
   const [count, setCount] = useState(0);
@@ -25,9 +26,7 @@ const ItemContainer = () => {
   };
 
   const subCount = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
+    setCount(count - 1);
   };
 
   const handleAddToCart = () => {
@@ -56,7 +55,6 @@ const ItemContainer = () => {
             : console.error(`No se encontró un producto con el ID ${itemId}`);
         })
         .catch((err) => console.error(err));
-
     } catch (error) {
       console.error("Error fetching data:", error);
     }

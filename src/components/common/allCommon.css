@@ -162,7 +162,7 @@
 }
 
 .price .main-tag p:last-of-type {
-  color: var(--orange);
+  color: var(--ligth-green);
   background-color: var(--pale-orange);
   padding: 3px 10px;
   border-radius: 5px;

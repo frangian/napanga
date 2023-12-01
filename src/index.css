@@ -1,12 +1,28 @@
 /* Fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
+:root {
+  --ligth-green: #72A184;
+  --pale-orange: hsl(25, 100%, 94%);
+  --vd-blue: hsl(220, 13%, 13%);
+  --d-grayish-blue: rgb(104, 112, 125);
+  --grayish-blue: hsl(220, 14%, 75%);
+  --l-grayish-blue: hsl(223, 64%, 98%);
+  --white: hsl(0, 0%, 100%);
 
+  --p-fs: 1rem;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* outline: 1px solid red; */
+}
+
+body {
+  margin: 0;
+  font-family: Kumbh Sans;
 }
 
 p, h1, h2, button {
@@ -16,4 +32,35 @@ p, h1, h2, button {
 a {
   text-decoration: none;
   color: #72A184;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  background-color: unset;
+}
+
+.activated {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  border: 3px solid var(--ligth-green);
+  border-radius: 10px;
+  background-color: #e3dfdfab;
+}
+
+@media (min-width: 769px) {
+  .hide-in-desktop {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-in-mobile {
+    display: none;
+  }
 }

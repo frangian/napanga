@@ -20,13 +20,6 @@ export const customTheme = createTheme({
     fontFamily: "Indie Flower",
   },
   components: {
-    // MuiBadge: {
-    //   styleOverrides: {
-    //     root: (props) => ({
-    //       ...(props.color = "#72A184" && { backgroundColor: "#2A332D" }),
-    //     }),
-    //   },
-    // },
     MuiButton: {
       defaultProps: {
         variant: "contained",

@@ -7,33 +7,33 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
+import Gallery from "../../common/Gallery";
+import MobileGallery from "../../common/MobileGallery";
+import Description from "../../common/Description";
 
 const Item = ({
   product,
   count,
   addCount,
   subCount,
-  addToCart, 
+  addToCart,
   handleStock,
 }) => {
-
-  const AddSubButton = ({ onClick, children }) => (
-    <button
-      onClick={onClick}
-      style={{
-        height: "50px",
-        width: "40px",
-        backgroundColor: "#FFF",
-        color: "#2A332D",
-      }}
-    >
-      {children}
-    </button>
-  );
+  console.log("Item render");
 
   return (
-    <>
-      <Card
+    <div className="item-container">
+      <Gallery />
+      <MobileGallery />
+      <Description
+        product={product}
+        onQuant={count}
+        onAdd={addCount}
+        onRemove={subCount}
+        onSetOrderedQuant={addToCart}
+      />
+
+      {/* <Card
         sx={{
           maxWidth: 345,
           margin: "auto",
@@ -86,7 +86,7 @@ const Item = ({
                 borderRadius: 30,
               }}
             >
-              <AddSubButton onClick={subCount}>-</AddSubButton>
+              <AddSubButton disabled={count === 0} onClick={subCount}>-</AddSubButton>
 
               <span
                 style={{
@@ -116,8 +116,8 @@ const Item = ({
           </Box>
           <Typography>Stock Disponible: {handleStock()}</Typography>
         </CardContent>
-      </Card>
-    </>
+      </Card> */}
+    </div>
   );
 };
 
