@@ -1,14 +1,11 @@
 import { useCart } from "../../context/CartContext";
 import { IconButton } from "@mui/material";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import { customTheme } from "../../themeconfig";
 import deleteIcon from "../../assets/icons/icon-delete.svg";
-import "../common/allCommon.css";
 import { Link } from "react-router-dom";
 
 const CartWidget = ({ onShow }) => {
   console.log("cartwidget render");
-  const { cart, itemsQuantity, deleteItem } = useCart();
+  const { cart, itemsQuantity, deleteItem, calculateTotalCart } = useCart();
 
   return (
     <section className="cart">
@@ -27,10 +24,12 @@ const CartWidget = ({ onShow }) => {
                     <p>{product.title}</p>
                     <div className="price">
                       <span>
-                        {`$${product.price.toFixed(0)} x ${itemsQuantity} = `}
+                        {`$${product.price.toFixed(0)} x ${
+                          product.quantity
+                        } = `}
                       </span>
                       <span>
-                        {`$${(product.price * itemsQuantity).toFixed(0)}`}
+                        {`$${(product.price * product.quantity).toFixed(0)}`}
                       </span>
                     </div>
                   </div>
@@ -38,18 +37,25 @@ const CartWidget = ({ onShow }) => {
                     className="delete-button"
                     size="small"
                     disableRipple
-                    onClick={()=>{deleteItem(product)}}
+                    onClick={() => {
+                      deleteItem(product);
+                    }}
                   >
                     <img src={deleteIcon} alt="delete-item" />
                   </IconButton>
                 </div>
               );
             })}
+            <p className="total">
+              Total a pagar:{" "}
+              <span className="valor-total">
+                ${calculateTotalCart().toFixed()}
+              </span>
+            </p>
             <Link to={"/cart"}>
               <button
                 className="checkout"
                 onClick={() => {
-                  // onReset();
                   onShow(false);
                 }}
               >

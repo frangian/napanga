@@ -1,3 +1,4 @@
+import "./cart.css"
 import {
   Paper,
   Table,

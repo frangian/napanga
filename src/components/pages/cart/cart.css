@@ -36,10 +36,10 @@
 
 }
 
-/* .cart hr {
+.cart hr {
   margin: 0;
-  color: var(--l-grayish-blue);
-} */
+  color: var(--ligth-green);
+}
 
 .cart .cart-content {
   padding: 24px;
@@ -63,6 +63,8 @@
   justify-content: space-between;
   gap: 10px;
   width: 100%;
+  /* border-bottom: 0.5px solid var(--ligth-green) */
+
 }
 
 .cart .product img {
@@ -74,10 +76,6 @@
 .cart .product .info {
   color: #72a184;
   width: 195px;
-  /* display: flex; */
-  /* flex-direction: column;
-  align-items: flex-start; */
-  /* justify-content: space-between; */
 }
 
 .cart .product .info > p {
@@ -88,7 +86,7 @@
   white-space: nowrap; /* Evita el salto de línea */
   overflow: hidden;    /* Oculta el contenido que excede el ancho */
   text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
-  font-size: 20px;
+  font-size: 24px;
 
 }
 
@@ -98,9 +96,14 @@
   }
 }
 
+.cart .product .info .price span {
+  font-size: 22px;
+  color: var(--ligth-green);
+}
+
 .cart .product .info .price span:last-of-type {
   font-weight: 700;
-  color: var(--vd-blue);
+  color: var(--ligth-green);
 }
 
 .cart .product .delete-button img {
@@ -117,7 +120,7 @@
 .cart button.checkout {
   padding: 10px 20px;
   color: #2a332d;
-  background-color: #72a184;
+  background-color: var(--ligth-green);
   width: 100%;
   text-transform: capitalize;
   font-size: 25px;
@@ -130,15 +133,8 @@
   opacity: 0.6;
 }
 
-.price {
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px; */
-}
-
 @media (max-width: 768px) {
-  .price {
+  .cart .product .info .price {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -146,29 +142,12 @@
   }
 }
 
-.price p {
-  margin: 0;
-}
-
-.price .main-tag {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-.price .main-tag p:first-of-type {
-  color: var(--vd-blue);
-  font-size: 25px;
-  font-weight: 700;
-}
-
-.price .main-tag p:last-of-type {
+.cart .cart-content p.total {
   color: var(--ligth-green);
-  background-color: var(--pale-orange);
-  padding: 3px 10px;
-  border-radius: 5px;
-  font-weight: 700;
+  font-size: 23px;
+  margin: 20px 0;
 }
 
-.price s {
+.cart .cart-content p.total span {
   font-weight: 700;
 }
