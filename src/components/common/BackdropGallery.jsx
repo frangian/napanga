@@ -1,21 +1,9 @@
 import { useState, useEffect } from "react";
 import { Backdrop, IconButton } from "@mui/material";
-import prod1 from "../../assets/Pictures/image-product-1.jpg";
-import prod2 from "../../assets/Pictures/image-product-2.jpg";
-import prod3 from "../../assets/Pictures/image-product-3.jpg";
-import prod4 from "../../assets/Pictures/image-product-4.jpg";
-
-import thumb1 from "../../assets/Pictures/image-product-1-thumbnail.jpg";
-import thumb2 from "../../assets/Pictures/image-product-2-thumbnail.jpg";
-import thumb3 from "../../assets/Pictures/image-product-3-thumbnail.jpg";
-import thumb4 from "../../assets/Pictures/image-product-4-thumbnail.jpg";
-
 import CloseIcon from "../../assets/icons/CloseIcon";
 import PreviousIcon from "../../assets/icons/PreviousIcon";
 import NextIcon from "../../assets/icons/NextIcon";
 
-const IMAGES = [prod1, prod2, prod3, prod4];
-const images = [thumb1, thumb2, thumb3, thumb4];
 const BackdropGallery = ({ images, open, handleClose, currentPassedImage }) => {
   const [backdropImage, setBackdropImage] = useState(currentPassedImage);
   const [currentPassedImageIndex, setCurrentPassedImageIndex] = useState(1);
@@ -25,7 +13,7 @@ const BackdropGallery = ({ images, open, handleClose, currentPassedImage }) => {
     images.forEach((imgg, index) => {
       imgg === currentPassedImage && setCurrentPassedImageIndex(index);
     });
-  }, [currentPassedImage]);
+  }, [currentPassedImage, images]);
 
   const handleClick = (index = null) => {
     setBackdropImage(images[index]);

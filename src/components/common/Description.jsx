@@ -1,29 +1,33 @@
 import CartIcon from "../../assets/icons/CartIcon";
 import QuantityButton from "./QuantityButton";
 
-const Description = ({ onQuant, onAdd, onRemove, onSetOrderedQuant }) => {
+const Description = ({
+  product,
+  count,
+  addCount,
+  subCount,
+  addToCart,
+  handleStock
+}) => {
   return (
     <section className="description">
-      <p className="pre">sneaker company</p>
-      <h1>fall limited edition sneakers</h1>
-      <p className="desc">
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they’ll withstand everything the
-        weather can offer
-      </p>
+      <p className="pre">DECO</p>
+      <h1>{product.title}</h1>
+      <h2 className="desc">{product.characteristics}</h2>
       <div className="price">
         <div className="main-tag">
-          <p>$125.00</p>
+          <p>${product.price}.00</p>
           <p>50%</p>
         </div>
-        <s>$250.00</s>
+        <s>${product.price * 2}.00</s>
       </div>
+      <p className="desc">Stock disponible: {handleStock()}</p>
       <div className="buttons">
-        <QuantityButton onQuant={onQuant} onRemove={onRemove} onAdd={onAdd} />
+        <QuantityButton onQuant={count} onRemove={subCount} onAdd={addCount} />
         <button
           className="add-to-cart"
           onClick={() => {
-            onSetOrderedQuant(onQuant);
+            addToCart();
           }}
         >
           <CartIcon />
