@@ -18,7 +18,7 @@ const Item = ({
   return (
     <div className="item-container">
       <Gallery images={images}/>
-      <MobileGallery />
+      <MobileGallery images={images}/>
       <Description
         product={product}
         count={count}

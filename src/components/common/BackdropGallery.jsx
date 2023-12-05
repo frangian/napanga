@@ -98,7 +98,7 @@ const BackdropGallery = ({ images, open, handleClose, currentPassedImage }) => {
           <img
             src={backdropImage}
             alt="selected-product"
-            style={{ cursor: "auto" }}
+            style={{ cursor: "auto", maxWidth:"415px", margin:"auto" }}
           />
         </div>
         <div className="thumbnails">

@@ -13,7 +13,7 @@ const Description = ({
     <section className="description">
       <p className="pre">DECO</p>
       <h1>{product.title}</h1>
-      <h2 className="desc">{product.characteristics}</h2>
+      <h2 className="desc">{product.characteristics} </h2>
       <div className="price">
         <div className="main-tag">
           <p>${product.price}.00</p>

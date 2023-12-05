@@ -69,7 +69,7 @@
   justify-content: space-between;
   width: 90%;
   margin: 100px auto;
-  gap: 100px;
+  gap: 50px;
 }
 @media (max-width: 992px) {
   .item-container {
@@ -87,12 +87,17 @@
 }
 
 .gallery {
+  width: 525px;
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+
+.gallery .image {
+  height: 415px;
 }
 
 .gallery .image img {
@@ -115,7 +120,11 @@
 .gallery .thumbnails .img-holder {
   position: relative;
   height: 90px;
-  width: 90px;
+  /* width: 90px; */
+  max-width: 90px;
+
+  display: flex;
+  justify-content: center;
 }
 @media (max-width: 992px) {
   .gallery .thumbnails .img-holder {
@@ -126,6 +135,7 @@
 
 .gallery .thumbnails img {
   height: 90px;
+  max-width: 90px;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -145,6 +155,9 @@
 
 .gallery .backdrop .backdrop-content .image {
   position: relative;
+  width: 415px;
+  display: flex;
+  align-items: center;
 }
 
 .gallery .backdrop-content .image .icon-button-prev {
@@ -168,6 +181,8 @@
   height: 75px;
   width: 75px;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .gallery .backdrop .thumbnails img {
@@ -202,6 +217,7 @@
 
 .description {
   flex-basis: 50%;
+  /* max-width: 90vw; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -230,6 +246,11 @@
   font-weight: 700;
   font-size: 50px;
   margin: 0;
+  max-width: 565px;
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden;    /* Oculta el contenido que excede el ancho */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
+
 }
 @media (max-width: 768px) {
   .description h1 {
@@ -238,10 +259,22 @@
   }
 }
 
+.description h2 {
+  max-width: 100%;
+  overflow: hidden;    /* Oculta el contenido que excede el ancho */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
+
+}
+
 .description p.desc {
   color: var(--d-grayish-blue);
   font-weight: 500;
   line-height: 1.7;
+  max-width: 565px;
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden;    /* Oculta el contenido que excede el ancho */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
+
 }
 @media (max-width: 768px) {
   .description p.desc {
@@ -300,7 +333,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  /* width: 100%; */
   gap: 20px;
 }
 @media (max-width: 768px) {

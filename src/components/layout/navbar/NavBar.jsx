@@ -3,6 +3,7 @@ import { routes } from "../../../router/routes.js";
 import { Link } from "react-router-dom";
 import CartWidget from "../../common/CartWidget";
 import logo from "../../../assets/logo.png";
+import compraAsegurada from "../../../assets/compra_segura.png";
 import { useEffect, useRef, useState } from "react";
 import {
   Box,
@@ -25,7 +26,6 @@ import { useCart } from "../../../context/CartContext.jsx";
 const Navbar = () => {
   // console.log("navbar render");
   const routesFilteredByType = routes.filter((route) => route.type === "pages");
-  const logoImage = <img src={logo} alt="logo" style={{ width: "120px" }} />;
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [categories, setCategories] = useState([]);
   // CartWidget:
@@ -95,7 +95,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClick = (event) => {
-      toggleCartVisibility()
+      toggleCartVisibility();
       // Evitar que se propague el clic fuera del IconButton
       event.stopPropagation();
     };
@@ -107,16 +107,15 @@ const Navbar = () => {
     const iconButtonElement = iconButtonRef.current;
 
     if (iconButtonElement) {
-      iconButtonElement.addEventListener('click', handleClick);
+      iconButtonElement.addEventListener("click", handleClick);
     }
 
-    document.addEventListener('click', handleDocumentClick);
-
+    document.addEventListener("click", handleDocumentClick);
   }, []); // Solo se ejecuta al montar/desmontar el componente
 
-const toggleCartVisibility = () => {
-  setShowCart((prev) => !prev);
-};
+  const toggleCartVisibility = () => {
+    setShowCart((prev) => !prev);
+  };
   // -------------------------------------------------------
 
   return (
@@ -182,7 +181,11 @@ const toggleCartVisibility = () => {
             }}
           >
             <Link to={"/"} style={{ display: "flex" }}>
-              {logoImage}
+              <img
+                src={logo}
+                alt="logo"
+                style={{ width: "190px", height: "55px" }}
+              />
             </Link>
           </Box>
 
@@ -206,7 +209,7 @@ const toggleCartVisibility = () => {
           {/* ------------------Icono carrito---------------------- */}
           <div className="icono-carrito">
             <IconButton
-            id="iconButton"
+              id="iconButton"
               ref={iconButtonRef}
               disableRipple
               // onClick={() => {

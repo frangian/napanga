@@ -2,6 +2,7 @@ import { useCart } from "../../context/CartContext";
 import { IconButton } from "@mui/material";
 import deleteIcon from "../../assets/icons/icon-delete.svg";
 import { Link } from "react-router-dom";
+import QuantityButton from "./QuantityButton";
 
 const CartWidget = ({ onShow }) => {
   console.log("cartwidget render");
