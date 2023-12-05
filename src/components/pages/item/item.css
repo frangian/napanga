@@ -345,35 +345,6 @@
   }
 }
 
-.description .buttons .amount {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 15px;
-  width: 180px;
-  background-color: hsl(226.7, 42.9%, 95.9%);
-  border-radius: 7px;
-}
-@media (max-width: 992px) {
-  .description .buttons .amount {
-    width: 150px;
-  }
-}
-@media (max-width: 768px) {
-  .description .buttons .amount {
-    width: 100%;
-  }
-}
-
-.description .buttons .amount .minus {
-  display: flex;
-}
-
-.description .buttons .amount p {
-  font-weight: 700;
-  margin: 0;
-}
-
 .description .buttons .add-to-cart {
   padding: 15px 40px;
   background-color: var(--ligth-green);

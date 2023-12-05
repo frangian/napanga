@@ -23,7 +23,7 @@ const Description = ({
       </div>
       <p className="desc">Stock disponible: {handleStock()}</p>
       <div className="buttons">
-        <QuantityButton onQuant={count} onRemove={subCount} onAdd={addCount} />
+        <QuantityButton count={count} subCount={subCount} addCount={addCount} />
         <button
           className="add-to-cart"
           onClick={() => {

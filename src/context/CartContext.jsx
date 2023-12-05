@@ -36,15 +36,18 @@ export const CartProvider = ({ children }) => {
     if (cart.length > 0) {
       const updatedCart = [...cart];
       const index = existingItemIndex(updatedCart, item);
+      const itemStock = existingItemCart(item)? existingItemCart(item).stock : item.stock;
       // 2. chequeo de que ya exista en el carrito el producto que quiero agregar
       if (index !== -1) {
-        updatedCart[index] = {
-          ...updatedCart[index],
-          quantity: updatedCart[index].quantity + count,
-          stock: updatedCart[index].stock - count,
-        };
-        setCart(updatedCart);
-        sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+        if(count <= itemStock){
+          updatedCart[index] = {
+            ...updatedCart[index],
+            quantity: updatedCart[index].quantity + count,
+            stock: updatedCart[index].stock - count,
+          };
+          setCart(updatedCart);
+          sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
       }
       // 3. chequeo en caso de que no exista el producto, lo agrego al carrito ya existente
       else {

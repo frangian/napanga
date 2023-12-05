@@ -1,12 +1,14 @@
 import { useCart } from "../../context/CartContext";
-import { IconButton } from "@mui/material";
-import deleteIcon from "../../assets/icons/icon-delete.svg";
 import { Link } from "react-router-dom";
-import QuantityButton from "./QuantityButton";
+import Products from "./Products";
 
 const CartWidget = ({ onShow }) => {
   console.log("cartwidget render");
-  const { cart, itemsQuantity, deleteItem, calculateTotalCart } = useCart();
+  const {
+    cart,
+    itemsQuantity,
+    calculateTotalCart,
+  } = useCart();
 
   return (
     <section className="cart">
@@ -19,32 +21,11 @@ const CartWidget = ({ onShow }) => {
           <>
             {cart.map((product) => {
               return (
-                <div key={product.id} className="product">
-                  <img src={product.image} alt="product-thumbnail" />
-                  <div className="info">
-                    <p>{product.title}</p>
-                    <div className="price">
-                      <span>
-                        {`$${product.price.toFixed(0)} x ${
-                          product.quantity
-                        } = `}
-                      </span>
-                      <span>
-                        {`$${(product.price * product.quantity).toFixed(0)}`}
-                      </span>
-                    </div>
-                  </div>
-                  <IconButton
-                    className="delete-button"
-                    size="small"
-                    disableRipple
-                    onClick={() => {
-                      deleteItem(product);
-                    }}
-                  >
-                    <img src={deleteIcon} alt="delete-item" />
-                  </IconButton>
-                </div>
+                <Products
+                  key={product.id}
+                  product={product}
+                  className={true}
+                />
               );
             })}
             <p className="total">

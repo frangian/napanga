@@ -10,14 +10,13 @@ const ItemContainer = () => {
   console.log("ItemContainer render");
   const { itemId } = useParams();
   const [item, setItem] = useState({});
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState([]);
   const [count, setCount] = useState(0);
   const { existingItemCart, eachItemInCartStock, addToCart } = useCart();
-console.log(images);
+
   const addCount = () => {
-    const itemStock = existingItemCart(item)
-      ? existingItemCart(item).stock
-      : item.stock;
+    const itemStock = existingItemCart(item)? existingItemCart(item).stock : item.stock;
+    console.log(itemStock);
     if (count < itemStock) {
       setCount(count + 1);
     } else {
@@ -46,8 +45,8 @@ console.log(images);
   };
 
   const handleImages = (images) => {
-    setImages(images.map((img)=>img.imageUrl))
-  }
+    setImages(images.map((img) => img.imageUrl));
+  };
 
   useEffect(() => {
     console.log("entro al useEffect de ItemContainer");
@@ -57,7 +56,8 @@ console.log(images);
       getDoc(refDoc)
         .then((res) => {
           return res.data()
-            ? (setItem({ ...res.data(), id: res.id }), handleImages(res.data().images))
+            ? (setItem({ ...res.data(), id: res.id }),
+              handleImages(res.data().images))
             : console.error(`No se encontró un producto con el ID ${itemId}`);
         })
         .catch((err) => console.error(err));

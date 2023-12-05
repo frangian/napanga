@@ -13,7 +13,6 @@ const Item = ({
   handleStock,
 }) => {
   console.log("Item render");
-  console.log(product);
 
   return (
     <div className="item-container">

@@ -3,7 +3,7 @@ import { routes } from "../../../router/routes.js";
 import { Link } from "react-router-dom";
 import CartWidget from "../../common/CartWidget";
 import logo from "../../../assets/logo.png";
-import compraAsegurada from "../../../assets/compra_segura.png";
+import compraSeguraImg from "../../../assets/compra_segura.png";
 import { useEffect, useRef, useState } from "react";
 import {
   Box,
@@ -93,29 +93,29 @@ const Navbar = () => {
 
   // -------------------------------------------------------
 
-  useEffect(() => {
-    const handleClick = (event) => {
-      toggleCartVisibility();
-      // Evitar que se propague el clic fuera del IconButton
-      event.stopPropagation();
-    };
+  // useEffect(() => {
+  //   const handleClick = (event) => {
+  //     toggleCartVisibility();
+  //     // Evitar que se propague el clic fuera del IconButton
+  //     event.stopPropagation();
+  //   };
 
-    const handleDocumentClick = () => {
-      setShowCart(false);
-    };
+  //   const handleDocumentClick = () => {
+  //     setShowCart(false);
+  //   };
 
-    const iconButtonElement = iconButtonRef.current;
+  //   const iconButtonElement = iconButtonRef.current;
 
-    if (iconButtonElement) {
-      iconButtonElement.addEventListener("click", handleClick);
-    }
+  //   if (iconButtonElement) {
+  //     iconButtonElement.addEventListener("click", handleClick);
+  //   }
 
-    document.addEventListener("click", handleDocumentClick);
-  }, []); // Solo se ejecuta al montar/desmontar el componente
+  //   document.addEventListener("click", handleDocumentClick);
+  // }, []); // Solo se ejecuta al montar/desmontar el componente
 
-  const toggleCartVisibility = () => {
-    setShowCart((prev) => !prev);
-  };
+  // const toggleCartVisibility = () => {
+  //   setShowCart((prev) => !prev);
+  // };
   // -------------------------------------------------------
 
   return (
@@ -192,7 +192,7 @@ const Navbar = () => {
           {/*--------------------Menu-------------------------------*/}
           <Box
             sx={{
-              width: "250px",
+              width: "350px",
               display: { xs: "none", md: "flex" },
               justifyContent: "space-around",
               alignItems: "center",
@@ -200,21 +200,25 @@ const Navbar = () => {
             }}
           >
             {routesFilteredByType.map((page) => (
-              <Typography key={page.id} onClick={handleCloseNavMenu}>
+              <Typography
+                key={page.id}
+                onClick={handleCloseNavMenu}
+                sx={{ fontSize: "24px" }}
+              >
                 <Link to={page.path}>{page.title}</Link>
               </Typography>
             ))}
           </Box>
 
           {/* ------------------Icono carrito---------------------- */}
-          <div className="icono-carrito">
+          <Box className="icono-carrito">
             <IconButton
               id="iconButton"
               ref={iconButtonRef}
               disableRipple
-              // onClick={() => {
-              //   setShowCart(!showCart);
-              // }}
+              onClick={() => {
+                setShowCart(!showCart);
+              }}
               sx={{ transition: "none" }}
             >
               <Badge
@@ -235,7 +239,7 @@ const Navbar = () => {
               </Badge>
             </IconButton>
             {showCart && <CartWidget onShow={setShowCart} />}
-          </div>
+          </Box>
         </section>
 
         <section
@@ -251,11 +255,14 @@ const Navbar = () => {
               // margin: 2,
             }}
           >
-            <Typography color={{ color: customTheme.palette.green.dark }}>
+            <Typography
+              color={{ color: customTheme.palette.green.dark }}
+              sx={{ fontSize: "21px" }}
+            >
               Categorias:{" "}
             </Typography>
             {categories.map((category) => (
-              <Typography key={category} sx={{ marginLeft: "15px" }}>
+              <Typography key={category} sx={{ marginLeft: "15px",fontSize: "21px"  }} >
                 <Link
                   to={
                     category === "Todos" ? "/products" : `products/${category}`
