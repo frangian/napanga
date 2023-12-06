@@ -12,7 +12,7 @@ const Item = ({
   addToCart,
   handleStock,
 }) => {
-  console.log("Item render");
+  // console.log("Item render");
 
   return (
     <div className="item-container">

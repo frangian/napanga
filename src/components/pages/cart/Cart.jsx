@@ -4,7 +4,7 @@ import Products from "../../common/Products";
 import { Grid } from "@mui/material";
 
 const Cart = ({ cartItems, calculateTotalCart, handleForm }) => {
-  console.log("cart render");
+  // console.log("cart render");
 
   return (
     <>
@@ -17,6 +17,7 @@ const Cart = ({ cartItems, calculateTotalCart, handleForm }) => {
             {cartItems.map((product) => {
               return <Products key={product.id} product={product} />;
             })}
+            <hr/>
             <Grid container rowSpacing={1} sx={{ marginTop: 1 }}>
               <Grid item xs={7} className="grid-total-producto">
                 <p className="total">Subtotal: </p>

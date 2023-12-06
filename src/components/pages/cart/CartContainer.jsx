@@ -5,6 +5,7 @@ import { db } from "../../../firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
 
 const CartContainer = () => {
+  // console.log("cartContainer render");
   const { cart, calculateTotalCart } = useCart();
 
   const [buyer, setBuyer] = useState({
@@ -18,8 +19,6 @@ const CartContainer = () => {
     items: [],
     total: 0,
   });
-
-  console.log("cartContainer render");
 
   // const [formVisible, setFormVisible] = useState(false);
   // const handleAdd = (item) => {

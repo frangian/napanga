@@ -7,7 +7,7 @@ import { db } from "../../../firebaseConfig.js";
 import { getDoc, doc } from "firebase/firestore";
 
 const ItemContainer = () => {
-  console.log("ItemContainer render");
+  // console.log("ItemContainer render");
   const { itemId } = useParams();
   const [item, setItem] = useState({});
   const [images, setImages] = useState([]);
@@ -16,7 +16,6 @@ const ItemContainer = () => {
 
   const addCount = () => {
     const itemStock = existingItemCart(item)? existingItemCart(item).stock : item.stock;
-    console.log(itemStock);
     if (count < itemStock) {
       setCount(count + 1);
     } else {
@@ -49,7 +48,7 @@ const ItemContainer = () => {
   };
 
   useEffect(() => {
-    console.log("entro al useEffect de ItemContainer");
+    // console.log("entro al useEffect de ItemContainer");
     try {
       const refDoc = doc(db, "productList", itemId);
 
@@ -69,7 +68,6 @@ const ItemContainer = () => {
   if (!item.id) {
     return null; // O puedes mostrar un spinner u otra indicación de carga
   }
-  console.log(item);
   return (
     <>
       <Item

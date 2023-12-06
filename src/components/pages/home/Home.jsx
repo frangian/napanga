@@ -3,7 +3,6 @@ import home from "../../../assets/napanga_home.jpg";
 // import napangaImage from "../../../assets/napanga_home.jpg"
 
 const Home = () => {
-  console.log(home);
   return (
     <div
       className="home-container"

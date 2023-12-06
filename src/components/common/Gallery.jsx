@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import BackdropGallery from "./BackdropGallery";
 
 const Gallery = ({ images }) => {
-  console.log("Gallery render");
+  // console.log("Gallery render");
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [currentPassedImage, setCurrentPassedImage] = useState(images[0]);
 
   const [open, setOpen] = useState(false);
   const handleClick = (index) => {
-    console.log("entro al handleClick");
+    // console.log("entro al handleClick");
     setCurrentImage(images[index]);
   };
   const handleToggle = () => {
@@ -25,7 +25,7 @@ const Gallery = ({ images }) => {
   };
 
   useEffect(() => {
-    console.log("entro al useEffect de Gallery");
+    // console.log("entro al useEffect de Gallery");
     setCurrentPassedImage(currentImage);
   }, [currentImage, images]);
 
