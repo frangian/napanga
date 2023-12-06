@@ -5,22 +5,13 @@ import { db } from "../../../firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
 
 const CartContainer = () => {
+  const { cart, calculateTotalCart } = useCart();
+
   const [buyer, setBuyer] = useState({
     name: "",
     phone: "",
     email: "",
   });
-  const [formVisible, setFormVisible] = useState(false);
-
-  const {
-    cart,
-    existingItemCart,
-    addToCart,
-    subFromCart,
-    deleteItem,
-    clearCart,
-    calculateTotalCart,
-  } = useCart();
 
   const [purchase, setPurchase] = useState({
     buyer: {},
@@ -30,46 +21,49 @@ const CartContainer = () => {
 
   console.log("cartContainer render");
 
-  const handleAdd = (item) => {
-    const itemStock = existingItemCart(item)
-      ? existingItemCart(item).stock
-      : item.stock;
-    if (1 <= itemStock) {
-      const addition = addToCart(1, item);
-      return addition;
-    } else {
-      console.log("No hay suficiente stock disponible");
-    }
-  };
+  // const [formVisible, setFormVisible] = useState(false);
+  // const handleAdd = (item) => {
+  //   const itemStock = existingItemCart(item)
+  //     ? existingItemCart(item).stock
+  //     : item.stock;
+  //   if (1 <= itemStock) {
+  //     const addition = addToCart(1, item);
+  //     return addition;
+  //   } else {
+  //     console.log("No hay suficiente stock disponible");
+  //   }
+  // };
 
-  const handleSub = (item) => {
-    subFromCart(item);
-  };
+  // const handleSub = (item) => {
+  //   subFromCart(item);
+  // };
 
-  const handleDelete = (item) => {
-    const deletion = deleteItem(item);
-    return deletion;
-  };
+  // const handleDelete = (item) => {
+  //   const deletion = deleteItem(item);
+  //   return deletion;
+  // };
 
-  const handleClear = () => {
-    clearCart();
-  };
+  // const handleClear = () => {
+  //   clearCart();
+  // };
 
-  const handleTotalToPay = () => {
-    const total = calculateTotalCart();
-    return total;
-  };
+  // const handleTotalToPay = () => {
+  //   const total = calculateTotalCart();
+  //   return total;
+  // };
 
-  const handleOrder = () => {
-    setFormVisible(true);
-  };
+  // const handleOrder = () => {
+  //   setFormVisible(true);
+  // };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBuyer((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleForm = (userData) => {
+    setBuyer({
+      name: userData.name,
+      phone: userData.phone,
+      email: userData.email,
+    });
+    // setValidSubmit(true);
+    sendOrder();
   };
 
   const sendOrder = () => {
@@ -89,25 +83,12 @@ const CartContainer = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendOrder();
-  };
-
   return (
-      <Cart
-        cartItems={cart}
-        handleAdd={handleAdd}
-        handleSub={handleSub}
-        handleDelete={handleDelete}
-        handleClear={handleClear}
-        calculateTotalCart={handleTotalToPay}
-        formVisible={formVisible}
-        handleOrder={handleOrder}
-        handleChange={handleChange}
-        buyer={buyer}
-        handleSubmit={handleSubmit}
-      />
+    <Cart
+      cartItems={cart}
+      handleForm={handleForm}
+      calculateTotalCart={calculateTotalCart}
+    />
   );
 };
 

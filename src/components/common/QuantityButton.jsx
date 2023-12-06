@@ -3,9 +3,7 @@ import plus from "../../assets/Pictures/icon-plus.svg";
 import minus from "../../assets/Pictures/icon-minus.svg";
 
 const QuantityButton = ({ className, count, subCount, addCount }) => {
-  console.log(className);
   const classname = className ? "amount-cartWidget" : "amount"
-  console.log(classname);
   return (
     <div className={classname}>
       <button className="minus" onClick={subCount} disabled={count === 0}>
