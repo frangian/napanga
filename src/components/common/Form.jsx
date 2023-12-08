@@ -13,15 +13,16 @@ const Form = ({ handleForm }) => {
       handleForm(data);
     },
     validationSchema: Yup.object({
-      name: Yup.string("El nombre debe contener letras unicamente")
+      name: Yup.string()
         .required("Campo obligatorio")
-        .min(3, "El nombre no puede tener menos de 3 caracteres"),
-      phone: Yup.number(
-        "El telefono debe contener numeros unicamente"
-      ).required("Campo obligatorio"),
+        .min(3, "El nombre no puede tener menos de 3 caracteres")
+        .matches(/^[A-Za-z ]*$/, "Ingresa solo letras y/o espacios"),
+      phone: Yup.number()
+        .required("Campo obligatorio")
+        .typeError("Por favor, ingresa un número válido"),
       email: Yup.string()
-        .email("El email ingresado no corresponde a un email valido")
-        .required("Campo obligatorio"),
+        .required("Campo obligatorio")
+        .email("El email ingresado no corresponde a un email valido"),
     }),
     validateOnChange: false,
   });
@@ -32,7 +33,9 @@ const Form = ({ handleForm }) => {
       onSubmit={handleSubmit}
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Typography sx={{fontSize:"40px", marginBottom:"24px"}}>Datos del comprador</Typography>
+      <Typography sx={{ fontSize: "40px", marginBottom: "24px" }}>
+        Datos del comprador
+      </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>
           <TextField
@@ -41,8 +44,8 @@ const Form = ({ handleForm }) => {
             label="Nombre y Apellido"
             name="name"
             variant="outlined"
-            inputProps={{style: {fontSize: 30}}}
-            InputLabelProps={{style: {fontSize: 30}}}
+            inputProps={{ style: { fontSize: 30 } }}
+            InputLabelProps={{ style: { fontSize: 30 } }}
             value={values.name}
             error={errors.name ? true : false}
             helperText={errors.name}
@@ -56,8 +59,8 @@ const Form = ({ handleForm }) => {
             label="Numero de telefono"
             name="phone"
             variant="outlined"
-            inputProps={{style: {fontSize: 30}}}
-            InputLabelProps={{style: {fontSize: 30}}}
+            inputProps={{ style: { fontSize: 30 } }}
+            InputLabelProps={{ style: { fontSize: 30 } }}
             error={errors.phone ? true : false}
             helperText={errors.phone}
             onChange={handleChange}
@@ -71,8 +74,8 @@ const Form = ({ handleForm }) => {
             label="Email"
             name="email"
             variant="outlined"
-            inputProps={{style: {fontSize: 30}}}
-            InputLabelProps={{style: {fontSize: 30}}}
+            inputProps={{ style: { fontSize: 30 } }}
+            InputLabelProps={{ style: { fontSize: 30 } }}
             error={errors.email ? true : false}
             helperText={errors.email}
             onChange={handleChange}

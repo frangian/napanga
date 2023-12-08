@@ -15,19 +15,21 @@ const Contact = ({ handleForm }) => {
       handleForm(data);
     },
     validationSchema: Yup.object({
-      nombre: Yup.string("El nombre debe contener letras unicamente")
+      nombre: Yup.string()
         .required("Campo obligatorio")
-        .min(3, "El nombre no puede tener menos de 3 caracteres"),
-      apellido: Yup.string("El apellido debe contener letras unicamente")
+        .min(3, "El nombre no puede tener menos de 3 caracteres")
+        .matches(/^[A-Za-z ]*$/, "Ingresa solo letras y/o espacios"),
+      apellido: Yup.string()
         .required("Campo obligatorio")
-        .min(3, "El nombre no puede tener menos de 3 caracteres"),
-      telefono: Yup.number(
-        "El telefono debe contener numeros unicamente"
-      ).required("Campo obligatorio"),
+        .min(3, "El nombre no puede tener menos de 3 caracteres")
+        .matches(/^[A-Za-z ]*$/, "Ingresa solo letras y/o espacios"),
+      telefono: Yup.number()
+        .typeError("Por favor, ingresa un número válido")
+        .required("Campo obligatorio"),
       email: Yup.string()
         .email("El email ingresado no corresponde a un email valido")
         .required("Campo obligatorio"),
-      mensaje: Yup.string("El mensaje debe contener letras unicamente")
+      mensaje: Yup.string()
         .required("Campo obligatorio")
         .min(3, "El nombre no puede tener menos de 3 caracteres"),
     }),
