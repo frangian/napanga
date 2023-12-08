@@ -8,6 +8,7 @@ const Form = ({ handleForm }) => {
       name: "",
       phone: "",
       email: "",
+      confirmEmail: "",
     },
     onSubmit: (data) => {
       handleForm(data);
@@ -19,10 +20,13 @@ const Form = ({ handleForm }) => {
         .matches(/^[A-Za-z ]*$/, "Ingresa solo letras y/o espacios"),
       phone: Yup.number()
         .required("Campo obligatorio")
-        .typeError("Por favor, ingresa un número válido"),
+        .typeError("Ingresa solo números"),
       email: Yup.string()
         .required("Campo obligatorio")
-        .email("El email ingresado no corresponde a un email valido"),
+        .email("Ingresa un email válido"),
+      confirmEmail: Yup.string()
+        .oneOf([Yup.ref("email"), null], "Los emails deben coincidir")
+        .required("Campo obligatorio"),
     }),
     validateOnChange: false,
   });
@@ -82,6 +86,22 @@ const Form = ({ handleForm }) => {
             value={values.email}
           />
         </Grid>
+        <Grid item xs={12} md={12}>
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Confirme el Email"
+            name="confirmEmail"
+            variant="outlined"
+            inputProps={{ style: { fontSize: 30 } }}
+            InputLabelProps={{ style: { fontSize: 30 } }}
+            error={errors.confirmEmail ? true : false}
+            helperText={errors.confirmEmail}
+            onChange={handleChange}
+            value={values.confirmEmail}
+          />
+        </Grid>
+
       </Grid>
       <Button
         variant="contained"
