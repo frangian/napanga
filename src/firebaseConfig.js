@@ -28,7 +28,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-/* 
+ // --------------------------------------------------------------- //
 // Inicio authentication
 const auth = getAuth(app);
 
@@ -73,7 +73,7 @@ export const registro = async ({ email, password }) => {
 export const forgotPassword = async (email) =>{
   await sendPasswordResetEmail(auth, email)
 }
-*/
 
+// ------------------------------------------------------------- //
 // Incio Firestore
 export const db = getFirestore(app);
