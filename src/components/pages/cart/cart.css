@@ -94,3 +94,11 @@ span.valor-total {
 .css-1x9zwsu-MuiFormHelperText-root.Mui-error {
   font-size: 24px;
 }
+
+.product-content{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #72a184;
+}

@@ -3,10 +3,12 @@ import Login from "./Login";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginGoogle, onSignIn } from "../../../firebaseConfig";
+import { useUser } from "../../../context/UserContext";
 
 const LoginContainer = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { login } = useUser();
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -17,15 +19,14 @@ const LoginContainer = () => {
 
   const handleChange = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    console.log(userCredentials);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await onSignIn(userCredentials);
-      console.log(res);
       if (res.user) {
+        login(res.user.accessToken);
         navigate("/");
       }
     } catch (error) {

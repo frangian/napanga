@@ -18,6 +18,8 @@ export const customTheme = createTheme({
   },
   typography: {
     fontFamily: "Indie Flower",
+    color: "#2a332d",
+    // fontSize: 20,
   },
   components: {
     MuiButton: {
