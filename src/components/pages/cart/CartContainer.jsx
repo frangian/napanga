@@ -3,10 +3,12 @@ import { useCart } from "../../../context/CartContext.jsx";
 import { useState } from "react";
 import { db } from "../../../firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const CartContainer = () => {
   // console.log("cartContainer render");
-  const { cart, calculateTotalCart } = useCart();
+  const { cart, calculateTotalCart, clearCart } = useCart();
+  const navigate = useNavigate();
 
   const [buyer, setBuyer] = useState({
     name: "",
@@ -20,49 +22,14 @@ const CartContainer = () => {
     total: 0,
   });
 
-  // const [formVisible, setFormVisible] = useState(false);
-  // const handleAdd = (item) => {
-  //   const itemStock = existingItemCart(item)
-  //     ? existingItemCart(item).stock
-  //     : item.stock;
-  //   if (1 <= itemStock) {
-  //     const addition = addToCart(1, item);
-  //     return addition;
-  //   } else {
-  //     console.log("No hay suficiente stock disponible");
-  //   }
-  // };
-
-  // const handleSub = (item) => {
-  //   subFromCart(item);
-  // };
-
-  // const handleDelete = (item) => {
-  //   const deletion = deleteItem(item);
-  //   return deletion;
-  // };
-
-  // const handleClear = () => {
-  //   clearCart();
-  // };
-
-  // const handleTotalToPay = () => {
-  //   const total = calculateTotalCart();
-  //   return total;
-  // };
-
-  // const handleOrder = () => {
-  //   setFormVisible(true);
-  // };
-
-  const handleForm = (userData) => {
+  const handleForm = ({ name, phone, email }) => {
     setBuyer({
-      name: userData.name,
-      phone: userData.phone,
-      email: userData.email,
+      name,
+      phone,
+      email,
     });
     // setValidSubmit(true);
-    sendOrder();
+    // sendOrder();
   };
 
   const sendOrder = () => {
@@ -78,6 +45,8 @@ const CartContainer = () => {
     addDoc(orderCollection, order).then(({ id }) => {
       if (id) {
         alert("Su orden: " + id + " ha sido completada!");
+        clearCart();
+        navigate("./")
       }
     });
   };

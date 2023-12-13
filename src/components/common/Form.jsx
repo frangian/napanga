@@ -1,17 +1,22 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useUser } from "../../context/UserContext";
 
 const Form = ({ handleForm }) => {
+  const { user } = useUser();
+
   const { handleSubmit, handleChange, values, errors } = useFormik({
+    enableReinitialize: true,
     initialValues: {
       name: "",
       phone: "",
-      email: "",
+      email: user ? user.email : "",
       confirmEmail: "",
     },
-    onSubmit: (data) => {
-      handleForm(data);
+    onSubmit: (userData) => {
+      console.log(userData);
+      handleForm(userData);
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -101,7 +106,6 @@ const Form = ({ handleForm }) => {
             value={values.confirmEmail}
           />
         </Grid>
-
       </Grid>
       <Button
         variant="contained"

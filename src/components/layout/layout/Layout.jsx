@@ -11,7 +11,7 @@ const Layout = () => {
         sx={{
           flexGrow: 1,
           width: "100%",
-          padding: "128px 0 0 0",
+          padding: "164px 0 0 0",
           minHeight: "100vh",
         }}
       >

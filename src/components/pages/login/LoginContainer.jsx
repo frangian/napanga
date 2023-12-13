@@ -26,7 +26,8 @@ const LoginContainer = () => {
     try {
       const res = await onSignIn(userCredentials);
       if (res.user) {
-        login(res.user.accessToken);
+        console.log(res.user);
+        login(res.user);
         navigate("/");
       }
     } catch (error) {

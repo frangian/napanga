@@ -291,7 +291,7 @@ const Navbar = () => {
                         color: "#72a184",
                       }}
                     >
-                      Logout
+                      Cerrar sesion
                     </Typography>
                   </MenuItem>
                 </Menu>
@@ -332,6 +332,7 @@ const Navbar = () => {
           className="nav-section"
           style={{
             backgroundColor: customTheme.palette.green.light,
+            height:"50px"
           }}
         >
           {/* ------------------------ categorias --------------------------- */}

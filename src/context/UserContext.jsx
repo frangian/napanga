@@ -7,23 +7,23 @@ export const UserProvider = ({ children }) => {
     JSON.parse(sessionStorage.getItem("user" || null))
   );
 
-  const login = ( token ) => {
-    const updatedUser = { ...user, access: true, token };
+  const login = ({ email, accessToken }) => {
+    const updatedUser = { ...user, access: true, email, token: accessToken };
     setUser(updatedUser);
     sessionStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
   const logout = () => {
-    setUser(null)
+    setUser(null);
     sessionStorage.removeItem("user");
-  }
-
+  };
+console.log(user);
   return (
     <UserContext.Provider
       value={{
         user,
         login,
-        logout
+        logout,
       }}
     >
       {children}
