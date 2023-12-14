@@ -12,10 +12,10 @@ const ItemList = ({ id, title, capacity, characteristics, image, price }) => {
           <p className="products-capacity">Capacidad: {capacity}</p>
           <p className="products-description">{characteristics}</p>
           <p className="products-price">Precio: ${price}</p>
-          </div>
+        </div>
         <Link to={`/item/${id}`}>
-          <Button sx={{ margin: "10px 50px" }}>Mas información</Button>
-          </Link>
+          <Button sx={{ margin: "10px 50px", lineHeight:"1.3" }}>Mas información</Button>
+        </Link>
       </div>
     </>
   );
