@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
     setUser(null);
     sessionStorage.removeItem("user");
   };
-console.log(user);
+
   return (
     <UserContext.Provider
       value={{
